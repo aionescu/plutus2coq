@@ -139,6 +139,58 @@ library
                      , indents
                      , optparse-applicative
                      , yaml
+                     , base16-bytestring
+                     , base64-bytestring
+                     , boring
+                     , case-insensitive
+                     , cassava
+                     , cborg
+                     , serialise
+                     , constraints
+                     , constraints-extras
+                     , cryptonite
+                     , data-default-class
+                     , dependent-sum
+                     , dependent-sum-template
+                     , deriving-compat
+                     , extra
+                     , flat
+                     , formatting
+                     , basement
+                     , foundation
+                     , half
+                     , memory
+                     , megaparsec
+                     , microlens
+                     , nothunks
+                     , parser-combinators
+                     , prettyprinter
+                     , recursion-schemes
+                     , safe-exceptions
+                     , some
+                     , th-compat
+                     , type-equality
+                     , composition-prelude
+                     , cardano-binary
+                     , cardano-crypto
+                     , cardano-crypto-class
+                     , heapwords
+                     , th-lift-instances
+                     , hedgehog
+                     , deriving-aeson
+                     , bimap
+                     , multiset
+                     , profunctors
+                     , semigroups
+                     , witherable
+                     , th-lift
+                     , th-utilities
+                     , mmorph
+                     , monoidal-containers
+                     , dlist
+                     , free
+                     , foldable1-classes-compat
+                     , algebraic-graphs
 
   -- These are actually not used directly by hs-to-coq, but work around a
   -- bug(?) in GHC-8.4 that no longer loads other packages if there is a GHC

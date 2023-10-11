@@ -1,4 +1,62 @@
-resolver: lts-12.0
+resolver: lts-18.28
 packages:
 - '.'
-extra-deps: []
+allow-newer: true
+extra-deps:
+- base16-bytestring-1.0.2.0
+- base64-bytestring-1.2.1.0
+- boring-0.2.1
+- case-insensitive-1.2.1.0
+- cassava-0.5.3.0
+- cborg-0.2.9.0
+- serialise-0.2.6.0
+- composition-prelude-3.0.0.2
+- constraints-0.13.4
+- constraints-extras-0.4.0.0
+- cryptonite-0.30
+- data-default-class-0.1.2.0
+- dependent-sum-0.7.2.0
+- dependent-sum-template-0.1.1.1
+- deriving-compat-0.6.5
+- extra-1.7.14
+- flat-0.6
+- formatting-7.2.0
+- basement-0.0.16
+- foundation-0.0.30
+- half-0.3.1
+- memory-0.18.0
+- megaparsec-9.2.1
+- microlens-0.4.13.1
+- nothunks-0.1.4
+- parser-combinators-1.3.0
+- prettyprinter-1.7.1
+- recursion-schemes-5.2.2.4
+- safe-exceptions-0.1.7.4
+- some-1.0.5
+- th-compat-0.1.4
+- type-equality-1
+- github: input-output-hk/cardano-base
+  commit: 292b6e91169ffd7ed04753c41a0fb05ec6adae92
+  subdirs:
+  - cardano-binary
+  - cardano-crypto-class
+  - cardano-strict-containers
+  - heapwords
+- github: input-output-hk/cardano-crypto
+  commit: 6568a5e8f1bc231afaae9cc9f6a997d094438859
+- th-lift-instances-0.1.20
+- deriving-aeson-0.2.9
+- hedgehog-1.2
+- bimap-0.5.0
+- multiset-0.3.4.3
+- profunctors-5.6.2
+- semigroups-0.20
+- witherable-0.4.2
+- th-lift-0.8.4
+- th-utilities-0.2.5.0
+- mmorph-1.2.0
+- monoidal-containers-0.6.4.0
+- dlist-1.0
+- free-5.2
+- foldable1-classes-compat-0.1
+- algebraic-graphs-0.7
