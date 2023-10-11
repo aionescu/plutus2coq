@@ -1,0 +1,16 @@
+
+axiomatize module CoreArity
+
+# in CoreArity.typeArity termination go deferred
+# in CoreArity.mkEtaWW termination go deferred
+# in CoreArity.etaExpandToJoinPoint termination go deferred
+
+# axiomatize definition CoreArity.typeArity
+# axiomatize definition CoreArity.pushCoercion
+# axiomatize definition CoreArity.freshEtaId
+# axiomatize definition CoreArity.mkEtaWW
+# axiomatize definition CoreArity.etaInfoAppTy
+# axiomatize definition CoreArity.etaBodyForJoinPoint
+
+
+

@@ -1,0 +1,1 @@
+in Deriv.Ord__F_op_zl__ rewrite forall , Deriv.Ord__F_compare = GHC.Base.compare

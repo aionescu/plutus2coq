@@ -1,0 +1,17 @@
+axiomatize module TysWiredIn
+
+# already axiomatized
+skip AxiomatizedTypes.liftedTypeKind
+skip AxiomatizedTypes.constraintKind
+
+rename type RdrName.RdrName = PrelNames.RdrName
+
+
+# these use GHC.Arr.Array type
+
+skip TysWiredIn.parrFakeConArr
+skip TysWiredIn.boxedTupleArr
+skip TysWiredIn.unboxedTupleArr
+skip TysWiredIn.unboxedSumArr
+skip TysWiredIn.mk_sum
+

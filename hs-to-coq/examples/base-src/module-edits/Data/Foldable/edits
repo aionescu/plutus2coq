@@ -1,0 +1,50 @@
+skip module GHC.Types
+
+# partial
+
+skip Data.Foldable.minimumBy
+skip Data.Foldable.maximumBy
+
+# The default implementation of elem is hard to translate
+# (it recurses through the non-method any)
+# So we remove the method and make the default method simply code
+add Data.Foldable Definition Data.Foldable.elem {f} `{Foldable f} {a} `{GHC.Base.Eq_ a} :
+  a -> ((f a) -> bool) :=
+  fun x xs => Data.Foldable.any (fun y => x GHC.Base.== y) xs.
+
+# Needs Alternative
+skip Data.Foldable.asum
+skip Data.Foldable.msum
+
+# Coq’s type class inference does not find the right instance
+# Why?
+redefine Definition Data.Foldable.concat {t : Type -> Type} {a : Type} `{Foldable t} : (t (list a)) -> (list a) :=
+  fun xs =>
+    GHC.Base.build' (fun _ => (fun c n => foldr (fun x y => @foldr _ Foldable__list _ _  c y x) n xs)).
+
+skip Data.Foldable.Foldable__First
+skip Data.Foldable.Foldable__Last
+
+# skip Data.Foldable.GHC_Base_Ord_a___GHC_Base_Monoid__Max_a_
+# skip Data.Foldable.GHC_Base_Ord_a___GHC_Base_Monoid__Min_a_
+
+order Data.Foldable.Foldable__list Data.Foldable.concatMap Data.Foldable.concat
+order Data.Foldable.Foldable__list Data.Foldable.Foldable__NonEmpty_fold
+
+# Generic stuff
+skip Data.Foldable.Foldable__U1
+skip Data.Foldable.Foldable__Array
+skip Data.Foldable.Foldable__V1
+skip Data.Foldable.Foldable__URec__Ptr__unit
+skip Data.Foldable.Foldable__URec__Char
+skip Data.Foldable.Foldable__URec__Double
+skip Data.Foldable.Foldable__URec__Float
+skip Data.Foldable.Foldable__URec__Int
+skip Data.Foldable.Foldable__URec__Word
+skip Data.Foldable.Foldable__M1
+skip Data.Foldable.Foldable__K1
+skip Data.Foldable.Foldable__Rec1
+skip Data.Foldable.Foldable__Par1
+skip Data.Foldable.Foldable__op_ZCziZC__
+skip Data.Foldable.Foldable__op_ZCztZC__
+skip Data.Foldable.Foldable__op_ZCzpZC__

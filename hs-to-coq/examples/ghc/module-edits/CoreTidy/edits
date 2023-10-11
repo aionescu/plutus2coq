@@ -1,0 +1,34 @@
+
+skip module CoreSeq
+
+#
+# No unfolding information
+#
+redefine Definition CoreTidy.tidyUnfolding : Core.TidyEnv -> (Core.Unfolding ->  (Core.Unfolding -> Core.Unfolding)) := fun e u v => u.
+
+#
+# avoid calling a smart constructor in a case that will never be executed
+#
+rewrite forall x, Core.isEvaldUnfolding x = false
+
+
+skip CoreTidy.tidyRule
+skip CoreTidy.tidyRules
+
+#
+# mutual recursion 
+#
+# inline the definition of CoreTidy.tidyAlt where it is used
+# so that Coq can tell that this is a structural recursion
+#
+inline mutual CoreTidy.tidyAlt
+
+# 
+# make tidyBind/tidyExpr more structural by fusing maps
+#
+in CoreTidy.tidyBind rewrite forall rec prs, GHC.Base.map rec (GHC.Base.map Data.Tuple.snd prs) = GHC.Base.map (fun x => rec (snd x)) prs
+
+#
+# crazy knot tying: this is ok because tidyLetBndr doesn't actually use its first argument.
+#
+in CoreTidy.tidyBind rewrite forall, CoreTidy.tidyLetBndr env' = CoreTidy.tidyLetBndr HsToCoq.Err.default

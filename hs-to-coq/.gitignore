@@ -1,0 +1,53 @@
+# hs-to-coq
+.ghc-tmp
+
+# Stack
+.stack-work
+
+# cabal
+dist-newstyle
+dist
+cabal.project.local
+.ghc.environment.*
+/hs-to-coq
+
+# Coq
+*.vo
+*.vos
+*.vok
+*.glob
+.*.aux
+*.v.d
+.coqdeps.d
+Makefile.coq.conf
+Makefile.bak
+Makefile.conf
+.Makefile.d
+.lia.cache
+Makefile
+
+# Haskell
+*.o
+*.hi
+*.o-boot
+*.hi-boot
+*.tix
+*.prof
+
+# emacs autosaves
+\#*
+.\#*
+
+# Scratch work files
+Example.hs
+example.v
+
+# links to ghc
+ghc-8.0.2
+ghc-8.4.1
+ghc-head
+/result
+
+*.crashcoqide
+*.DS_Store
+

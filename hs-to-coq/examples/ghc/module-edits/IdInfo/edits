@@ -1,0 +1,20 @@
+# needs a default for RecSelParent *before* one can be 
+# provided in the midamble
+skip Core.sel_tycon
+skip Core.df_con
+
+## needs Type.resultIdLevPoly
+skip Core.setLevityInfoWithType
+
+## Printing
+skip Core.pprArityInfo
+skip Core.pprCafInfo
+skip Core.pprIdDetails
+skip Core.pprStrictness
+skip Core.ppArityInfo
+skip Core.ppCafInfo 
+
+## Ordering
+order Core.Eq___CafInfo Core.Ord__CafInfo
+order Core.Eq___TyCon Core.Eq___RecSelParent_op_zeze__
+order Core.Eq___PatSyn Core.Eq___RecSelParent_op_zeze__

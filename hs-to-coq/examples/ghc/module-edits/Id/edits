@@ -1,0 +1,23 @@
+# needs TysPrim.statePrimTyCon
+axiomatize definition Id.isStateHackType
+
+# RepType.countFunRepArgs
+skip Id.idFunRepArity
+
+# unfolding info 
+skip Id.setCaseBndrEvald
+
+# Needs `GHC.Prim.seq`, used to evaluate the type information strictly
+in Id.setIdType rewrite forall x y, GHC.Prim.seq x y = y
+
+# figure out GHC.Num.Int representation
+axiomatize definition Id.mkTemplateLocal 
+axiomatize definition Id.mkTemplateLocalsNum
+axiomatize definition Id.mkTemplateLocals 
+
+# skipping type and coercion variables
+skip Id.mkLocalCoVar 
+
+# don't change the scope of the Id
+skip Id.setIdNotExported
+skip Id.setIdExported

@@ -1,0 +1,16 @@
+polykinds Data.Functor.Const.Const k
+data kinds Data.Functor.Const.Const Type, k
+
+add Data.Functor.Const Instance Unpeel_Const (k a : Type) (b : k) : HsToCoq.Unpeel.Unpeel (Const a b) a := HsToCoq.Unpeel.Build_Unpeel _ _ getConst Mk_Const.
+
+order Data.Functor.Const.Eq___Const Data.Functor.Const.Ord__Const
+order Data.Functor.Const.Semigroup__Const Data.Functor.Const.Monoid__Const
+
+delete unused type variables Data.Functor.Const.Eq___Const
+delete unused type variables Data.Functor.Const.Ord__Const
+delete unused type variables Data.Functor.Const.Semigroup__Const
+delete unused type variables Data.Functor.Const.Monoid__Const
+
+order Unpeel_Const Data.Functor.Const.Eq___Const_op_zeze__
+
+order Data.Functor.Const.Functor__Const Data.Functor.Const.Applicative__Const_op_ztzg__

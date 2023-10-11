@@ -1,0 +1,50 @@
+import module GHC.Base
+
+# uses partial functions or is partial
+skip Data.OldList.genericIndex
+skip Data.OldList.unfoldr
+
+set type Data.OldList.maximumBy : forall {a}{_ : HsToCoq.Err.Default a}{_:GHC.Base.Eq_ a}{_:GHC.Base.Ord a}, (a -> (a -> comparison)) -> ((list a) -> a)
+set type Data.OldList.minimumBy : forall {a}{_ : HsToCoq.Err.Default a}{_:GHC.Base.Eq_ a}{_:GHC.Base.Ord a}, (a -> (a -> comparison)) -> ((list a) -> a)
+# set type Data.OldList.genericIndex : forall {a}{i}{_: HsToCoq.Err.Default a}{_:GHC.Num.Integral i}, (list a) -> (i -> a)
+
+
+# character constant
+axiomatize definition Data.OldList.unlines
+
+# mutrec
+skip Data.OldList.sortBy
+#skip Data.OldList.sortOn
+#skip Data.OldList.sort
+
+# tricky metric
+skip Data.OldList.groupBy
+# not obviously total, also strange Coq error
+skip Data.OldList.transpose
+# terminating, but hard to tell
+skip Data.OldList.permutations
+
+
+# "" pattern / not structually inductive
+skip Data.OldList.wordsFB
+skip Data.OldList.words
+skip Data.OldList.lines
+
+# precedence, ???
+skip Data.OldList.sb
+skip Data.OldList.snocSB
+
+# unboxed types, build
+skip Data.OldList.findIndices
+
+# needs one of the above
+skip Data.OldList.isInfixOf
+skip Data.OldList.subsequences
+skip Data.OldList.intersperse
+skip Data.OldList.group
+skip Data.OldList.genericReplicate
+skip Data.OldList.findIndex
+skip Data.OldList.inits
+skip Data.OldList.elemIndices
+skip Data.OldList.elemIndex
+skip Data.OldList.intercalate

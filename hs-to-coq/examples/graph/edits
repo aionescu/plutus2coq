@@ -1,0 +1,4 @@
+skip module GHC.Show
+skip module Data.Data
+skip module System.IO
+skip module Text.Show

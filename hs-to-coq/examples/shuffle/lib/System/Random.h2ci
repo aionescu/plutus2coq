@@ -1,0 +1,53 @@
+superclassCount:
+  System.Random.Random: '0'
+  System.Random.RandomGen: '0'
+defaultMethods:
+  System.Random.Random: fromList [(Qualified "System.Random" "randomIO",App (Qualid
+    (Qualified "System.Random" "getStdRandom")) (PosArg (Qualid (Qualified "System.Random"
+    "random")) :| [])),(Qualified "System.Random" "randomRIO",Fun (ExplicitBinder
+    (Ident (Bare "range")) :| []) (App (Qualid (Qualified "System.Random" "getStdRandom"))
+    (PosArg (Parens (App (Qualid (Qualified "System.Random" "randomR")) (PosArg (Qualid
+    (Bare "range")) :| []))) :| []))),(Qualified "System.Random" "randomRs",Fun (ExplicitBinder
+    (Ident (Bare "ival")) :| [ExplicitBinder (Ident (Bare "g"))]) (App (Qualid (Qualified
+    "GHC.Base" "build'")) (PosArg (Fun (ExplicitBinder UnderscoreName :| []) (Parens
+    (Fun (ExplicitBinder (Ident (Bare "cons_")) :| [ExplicitBinder (Ident (Bare "_nil"))])
+    (App (App (App (Qualid (Qualified "System.Random" "buildRandoms")) (PosArg (Qualid
+    (Bare "cons_")) :| [])) (PosArg (Parens (App (Qualid (Qualified "System.Random"
+    "randomR")) (PosArg (Qualid (Bare "ival")) :| []))) :| [])) (PosArg (Qualid (Bare
+    "g")) :| []))))) :| []))),(Qualified "System.Random" "randoms",Fun (ExplicitBinder
+    (Ident (Bare "g")) :| []) (App (Qualid (Qualified "GHC.Base" "build'")) (PosArg
+    (Fun (ExplicitBinder UnderscoreName :| []) (Parens (Fun (ExplicitBinder (Ident
+    (Bare "cons_")) :| [ExplicitBinder (Ident (Bare "_nil"))]) (App (App (App (Qualid
+    (Qualified "System.Random" "buildRandoms")) (PosArg (Qualid (Bare "cons_")) :|
+    [])) (PosArg (Qualid (Qualified "System.Random" "random")) :| [])) (PosArg (Qualid
+    (Bare "g")) :| []))))) :| [])))]
+  System.Random.RandomGen: fromList [(Qualified "System.Random" "genRange",Fun (ExplicitBinder
+    (Ident (Bare "arg_0__")) :| []) (App (Qualid (Bare "pair")) (PosArg (Qualid (Qualified
+    "GHC.Enum" "minBound")) :| [PosArg (Qualid (Qualified "GHC.Enum" "maxBound"))])))]
+classTypes:
+  System.Random.Random: fromList []
+  System.Random.RandomGen: fromList []
+classDefns:
+  System.Random.Random: ClassDefinition (Qualified "System.Random" "Random") [Typed
+    Ungeneralizable Explicit (Ident (Bare "a") :| []) (Qualid (Bare "Type"))] Nothing
+    [(Qualified "System.Random" "random",Forall (Typed Ungeneralizable Implicit (Ident
+    (Bare "g") :| []) (Qualid (Bare "Type")) :| []) (Forall (Generalized Implicit
+    (App (Qualid (Qualified "System.Random" "RandomGen")) (PosArg (Qualid (Bare "g"))
+    :| [])) :| []) (Arrow (Qualid (Bare "g")) (InScope (App (Qualid (Bare "op_zt__"))
+    (PosArg (Qualid (Bare "a")) :| [PosArg (Qualid (Bare "g"))])) "type")))),(Qualified
+    "System.Random" "randomR",Forall (Typed Ungeneralizable Implicit (Ident (Bare
+    "g") :| []) (Qualid (Bare "Type")) :| []) (Forall (Generalized Implicit (App (Qualid
+    (Qualified "System.Random" "RandomGen")) (PosArg (Qualid (Bare "g")) :| [])) :|
+    []) (Arrow (InScope (App (Qualid (Bare "op_zt__")) (PosArg (Qualid (Bare "a"))
+    :| [PosArg (Qualid (Bare "a"))])) "type") (Arrow (Qualid (Bare "g")) (InScope
+    (App (Qualid (Bare "op_zt__")) (PosArg (Qualid (Bare "a")) :| [PosArg (Qualid
+    (Bare "g"))])) "type")))))]
+  System.Random.RandomGen: ClassDefinition (Qualified "System.Random" "RandomGen")
+    [Typed Ungeneralizable Explicit (Ident (Bare "g") :| []) (Qualid (Bare "Type"))]
+    Nothing [(Qualified "System.Random" "genRange",Arrow (Qualid (Bare "g")) (InScope
+    (App (Qualid (Bare "op_zt__")) (PosArg (Qualid (Qualified "GHC.Num" "Int")) :|
+    [PosArg (Qualid (Qualified "GHC.Num" "Int"))])) "type")),(Qualified "System.Random"
+    "next",Arrow (Qualid (Bare "g")) (InScope (App (Qualid (Bare "op_zt__")) (PosArg
+    (Qualid (Qualified "GHC.Num" "Int")) :| [PosArg (Qualid (Bare "g"))])) "type")),(Qualified
+    "System.Random" "split",Arrow (Qualid (Bare "g")) (InScope (App (Qualid (Bare
+    "op_zt__")) (PosArg (Qualid (Bare "g")) :| [PosArg (Qualid (Bare "g"))])) "type"))]

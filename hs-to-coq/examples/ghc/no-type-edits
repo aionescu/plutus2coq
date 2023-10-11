@@ -1,0 +1,233 @@
+skip module TyCoRep
+skip module Coercion
+skip module CoAxiom
+skip module Type
+skip module Unify
+skip module TcType
+#skip module TysWiredIn
+skip module RepType
+skip module ForeignCall
+skip module	FamInstEnv
+skip module PprCore
+skip module Data.ByteString
+skip module ErrUtils
+skip module OccurAnal
+skip module CostCentre
+skip module PrimOp
+skip module TysPrim
+skip module Platform
+
+
+####################################################
+## Most of the time, we are counting 
+
+rename type GHC.Num.Int = nat
+
+rewrite forall, Data.Foldable.length       = Coq.Lists.List.length
+rewrite forall x y, GHC.List.replicate x y = Coq.Lists.List.repeat y x
+rewrite forall x, GHC.List.take x          = Coq.Lists.List.firstn x
+rewrite forall x, GHC.List.drop x          = Coq.Lists.List.skipn x
+
+
+####################################################
+## Glueing together the Core
+####################################################
+
+#
+# This must stay in sync with the Makefile
+#
+rename module Class   Core
+rename module TyCon   Core
+rename module DataCon Core
+rename module Var     Core
+rename module IdInfo  Core
+rename module PatSyn  Core
+rename module VarSet  Core
+rename module VarEnv  Core
+rename module CoreSyn Core
+rename module Demand  Core
+
+
+#
+# Punned constructor values (in Core)
+#
+rename value DataCon.HsSrcBang  = Core.Mk_HsSrcBang
+rename value DataCon.EqSpec     = Core.Mk_EqSpec
+rename value Class.Class        = Core.Mk_Class
+rename value Var.Id             = Core.Mk_Id
+rename value Var.TyVar          = Core.Mk_TyVar
+rename value Var.TcTyVar        = Core.Mk_TcTyVar
+rename value IdInfo.IdInfo      = Core.Mk_IdInfo
+rename value IdInfo.DFunId      = Core.Mk_DFunId
+rename value IdInfo.JoinId      = Core.Mk_JoinId
+rename value CoreSyn.Var        = Core.Mk_Var
+rename value CoreSyn.IsOrphan   = Core.Mk_IsOrphan
+rename value CoreSyn.RuleEnv    = Core.Mk_RuleEnv
+rename value Demand.ExnStr      = Core.Mk_ExnStr
+rename value Demand.Str         = Core.Mk_Str
+rename value Demand.Use         = Core.Mk_Use
+rename value Demand.DmdType     = Core.Mk_DmdType
+rename value Demand.StrictSig   = Core.Mk_StrictSig
+rename value Demand.KillFlags   = Core.Mk_KillFlags
+
+## Other punning
+
+rename value CoreFVs.FVAnn    = CoreFVs.Mk_FVAnn
+rename value CoreSubst.Subst  = CoreSubst.Mk_Subst
+
+###############################################################################
+#  General edits related to translating Core
+###############################################################################
+
+## Outputtable
+rewrite forall x, Core.pprIdDetails x = Panic.someSDoc
+## CallStack 
+rewrite forall x, Core.idInfo x = @Core.idInfo tt x
+
+
+###############################################################################
+#  Pruning the AST, general
+###############################################################################
+
+rename type PrimOp.PrimOp           = unit
+rename type ForeignCall.ForeignCall = unit
+rename type ForeignCall.CType       = unit
+rename type CostCentre.CostCentre   = unit
+
+# used in DataCon
+rename type MkId.DataConBoxer       = unit
+
+###############################################################################
+# brutaly skip all type info
+###############################################################################
+
+rename type TcType.TcTyVarDetails = unit
+
+rename type TyCoRep.Coercion      = unit
+rename type TyCoRep.Type_         = unit
+rename type TyCoRep.ThetaType     = unit
+rename type TyCoRep.TyBinder      = unit
+rename type TyCoRep.TyThing       = unit
+rename type TyCoRep.Kind          = unit
+rename type TyCoRep.PredType      = unit
+
+rename type TyCoRep.TvSubstEnv    = unit
+rename type TyCoRep.CvSubstEnv    = unit
+rename type TyCoRep.TCvSubst      = unit
+
+rename type CoAxiom.CoAxiom            = list
+rename type CoAxiom.Branched           = unit
+rename type CoAxiom.Unbranched         = unit
+rename type CoAxiom.BuiltInSynFamily   = unit
+rename type CoAxiom.Role               = unit
+rename value CoAxiom.Representational  = tt
+rename value CoAxiom.Nominal           = tt
+
+rename value TysWiredIn.liftedTypeKind = tt
+rename value TysWiredIn.constraintKind = tt
+
+###############################################################################
+# rewrites for type/corecion related operations defined in skipped modules
+##############################################################################
+
+# maybe some of these should be axioms instead of rewrites so that we have 
+# to consider each case.
+
+rewrite forall v,      Coercion.mkCoVarCo v = tt
+rewrite forall co,     Coercion.coercionType co = tt
+
+rewrite forall x,      TyCoRep.mkTyVarTy x = tt
+rewrite forall env x,  TyCoRep.tidyType env x = tt
+rewrite forall env co, TyCoRep.tidyCo env co = tt
+
+rewrite forall co,     TyCoRep.tyCoFVsOfCo co          = FV.emptyFV
+rewrite forall ty,     TyCoRep.tyCoFVsOfType ty        = FV.emptyFV
+rewrite forall b_ty,   TyCoRep.tyCoVarsOfTypeDSet b_ty = Core.emptyDVarSet
+rewrite forall co,     TyCoRep.tyCoVarsOfCoDSet co     = Core.emptyDVarSet
+rewrite forall s knd,  TyCoRep.substTyUnchecked s knd  = tt
+rewrite forall s t n,  TyCoRep.extendTvSubstWithClone s t n = s
+rewrite forall s ty,   TyCoRep.substTy s ty            = tt
+rewrite forall x,      TyCoRep.noFreeVarsOfType x      = true
+rewrite forall x y,    TyCoRep.zipTvSubst x y          = tt
+
+rewrite forall x,      Type.caseBinder x = x
+rewrite forall ty,     Type.typeKind  ty = tt
+rewrite forall x,      Type.mkInvForAllTys x y = tt
+
+rewrite forall x,   Type.getRuntimeRep x = tt
+rewrite forall x y, Type.piResultTy x y = tt
+rewrite forall x,   Type.splitFunTy x = (pair tt tt)
+rewrite forall ids, Type.toposortTyVars ids = ids
+rewrite forall f,   (f GHC.Base.∘ Type.getRuntimeRep) = f
+
+
+# axiomatize functions that return bool or option
+# 
+# these functions are not defined in any of the modules that we are translating
+# but we need them so we move them to Core as we axiomatize their results.
+#
+rename value TyCoRep.isCoercionType = Core.isCoercionType
+add Core Axiom Core.isCoercionType : unit -> bool.
+rename value Type.isFunTy = Core.isFunTy
+add Core Axiom Core.isFunTy : unit -> bool.
+rename value Type.isUnliftedType = Core.isUnliftedType
+add Core Axiom Core.isUnliftedType : unit -> bool.
+rename value Type.isTypeLevPoly = Core.isTypeLevPoly
+add Core Axiom Core.isTypeLevPoly : unit -> bool.
+rename value Type.resultIsLevPoly = Core.resultIsLevPoly
+add Core Axiom Core.resultIsLevPoly : unit -> bool.
+rename value Type.splitPiTy_maybe = Core.splitPiTy_maybe
+add Core Axiom Core.splitPiTy_maybe : unit -> option (unit * unit).
+rename value Type.isCoercionTy_maybe = Core.isCoercionTy_maybe
+add Core Axiom Core.isCoercionTy_maybe : unit -> option unit.
+rename value Coercion.eqCoercionX = Core.eqCoercionX
+add Core Axiom Core.eqCoercionX : RnEnv2 -> (unit -> (unit -> bool)).
+rename value Type.eqTypeX = Core.eqTypeX
+add Core Axiom Core.eqTypeX : RnEnv2 -> (unit -> (unit -> bool)).
+rename value Type.eqType = Core.eqType
+add Core Axiom Core.eqType : (unit -> (unit -> bool)).
+rename value TyCoRep.tidyTyCoVarBndr = Core.tidyTyCoVarBndr
+add Core Axiom Core.tidyTyCoVarBndr : TidyEnv -> (TyCoVar -> (TidyEnv * TyCoVar)).
+
+# Var
+axiomatize definition Core.isTyCoVar
+# DataCon
+axiomatize definition Core.dataConCannotMatch
+
+
+############################################################################
+# rewrites for type/corecion related operations defined in translated modules
+############################################################################
+
+# TODO: translate PrelNames
+rewrite forall id, (Unique.hasKey id PrelNames.absentErrorIdKey) = false
+
+rewrite forall x,      Core.sel_tycon x = tt
+rewrite forall x y,    Core.mkTyConKind x y = tt
+rewrite forall e t1 t2,  Core.rnBndrs2 e t1 t2 = env
+
+rewrite forall rhs,    CoreUtils.exprType rhs = tt
+
+rewrite forall con,    DataCon.dataConRepStrictness con = nil
+rewrite forall con,    DataCon.dataConRepArgTys con = nil
+rewrite forall con,    DataCon.dataConExTyVars con = @nil unit
+
+rewrite forall x,      Literal.literalType x = tt
+
+rewrite forall x,      Id.idType x = tt
+rewrite forall x t,    Id.setIdType x t = x
+
+rewrite forall ty,     CoreFVs.orphNamesOfType ty = NameSet.emptyNameSet
+rewrite forall co,     CoreFVs.orphNamesOfCo   co = NameSet.emptyNameSet
+rewrite forall id,     CoreFVs.bndrRuleAndUnfoldingFVs id = FV.emptyFV
+
+
+
+redefine Definition    CoreFVs.idRuleFVs      : Core.Id  -> FV.FV := fun id  => FV.emptyFV.
+redefine Definition    CoreFVs.varTypeTyCoFVs : Core.Var -> FV.FV := fun var => FV.emptyFV.
+redefine Definition    CoreFVs.idUnfoldingFVs : Core.Id  -> FV.FV := fun id  => FV.emptyFV.
+
+rewrite forall x y,    TyCon.mkTyConKind x y = tt
+
+# could make this unit too
+axiomatize definition  TyCon.RuntimeRepInfo 
