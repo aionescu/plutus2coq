@@ -1,0 +1,56 @@
+
+# Make it easier for Coq to see termination
+rename value Util.mapAndUnzip = NestedRecursionHelpers.mapAndUnzipFix 
+
+#
+# TODO: we don't try to translate the orphNames functions
+# not quite there yet.
+#
+skip CoreFVs.orphNamesOfFamInst  # needs FamInstEnv
+skip CoreFVs.orphNamesOfCoCon
+skip CoreFVs.orphNamesOfCoAxBranch
+skip CoreFVs.orphNamesOfType
+skip CoreFVs.orphNamesOfProv
+skip CoreFVs.orphNamesOfCoAxBranches
+skip CoreFVs.orphNamesOfTypes
+skip CoreFVs.orphNamesOfAxiom
+skip CoreFVs.orphNamesOfCos
+skip CoreFVs.orphNamesOfTyCon
+skip CoreFVs.orphNamesOfCo
+
+## TODO: nonstructural mutual recursion 
+skip CoreFVs.exprOrphNames
+skip CoreFVs.exprsOrphNames
+
+in CoreFVs.exprOrphNames inline mutual go_alt
+
+#
+# expr_fvs
+#
+# This set of mutually-recursive functions is heavily edited to make it past Coq's 
+# structural termination checker. (It is also no-longer mutually recursive).
+#
+# first, we get rid of parts of the structure that we do not need
+#
+skip CoreFVs.stableUnfoldingVars
+#
+# Then we unfuse some recursive calls so that Coq can see that they are structural
+#
+# Inline the definition of rhs_fvs (inline mutual doesn't quite do what we need)
+in CoreFVs.expr_fvs rewrite forall x, CoreFVs.rhs_fvs x = (match x with | pair bndr rhs => FV.unionFV (expr_fvs rhs) (bndrRuleAndUnfoldingFVs bndr) end)
+
+# replace mapUnionFV with unions . map  (and also inline an occurrence of rhs_fvs)
+in CoreFVs.expr_fvs rewrite forall alts,  (FV.mapUnionFV alt_fvs alts)  = FV.unionsFV (Lists.List.map alt_fvs alts)
+in CoreFVs.expr_fvs rewrite forall pairs, (FV.mapUnionFV CoreFVs.rhs_fvs pairs) = FV.unionsFV (Lists.List.map (fun x => match x with | pair bndr rhs => FV.unionFV (expr_fvs rhs) (CoreFVs.bndrRuleAndUnfoldingFVs bndr) end) pairs)
+
+
+# `freeVars = go where go = …`.  Since `go` is a function but `freeVars` isn't,
+# this blocks mutual recursion
+collapse let CoreFVs.freeVars
+
+# Justified by
+#   ∙ In `let 'pair _ ys := GHC.List.unzip xys in …`, we know that
+#     `ys = GHC.Base.map snd xys` (`Proofs.GHC.List.snd_unzip`).
+#   ∙ Successive `map`s can be converted to one `map` plus function composition
+#     (`Proofs.GHC.Base.map_map`).
+in CoreFVs.freeVarsBind rewrite forall, GHC.Base.map CoreFVs.freeVars rhss = GHC.Base.map (CoreFVs.freeVars GHC.Base.∘ snd) binds

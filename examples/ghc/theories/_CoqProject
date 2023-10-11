@@ -1,0 +1,39 @@
+-Q . Proofs
+-Q ../../../base ""
+-Q ../../../base-thy  Proofs
+-Q ../../ghc/lib ""
+-Q ../../transformers/lib ""
+-Q ../../containers/lib ""
+-Q ../../containers/theories ""
+-arg -w -arg -masking-absolute-name
+Util.v
+ContainerProofs.v
+Axioms.v
+ScopeInvariant.v
+JoinPointInvariants.v
+# JoinPointInvariantsInductive.v
+CoreInduct.v
+Exitify.v
+# CoreSubstInvariants.v
+StateLogic.v
+GhcTactics.v
+GhcUtils.v
+Forall.v
+Core.v
+CoreFVs.v
+Base.v
+VarSetFSet.v
+VarSet.v
+VarSetStrong.v
+VarEnv.v
+Unique.v
+Var.v
+FV.v
+CoreSubst.v
+OrdList.v
+CoreSemantics.v
+TrieMap.v
+CSE.v
+CoreStats.v
+UniqSetInv.v
+

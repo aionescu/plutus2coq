@@ -1,0 +1,66 @@
+
+# still partial
+skip Data.List.NonEmpty.!!
+
+skip Data.List.NonEmpty.fromList
+skip Data.List.NonEmpty.lift
+skip Data.List.NonEmpty.tails
+skip Data.List.NonEmpty.scanl
+skip Data.List.NonEmpty.scanr
+
+## in midamble, redefine to prove total
+skip Data.List.NonEmpty.toList
+skip Data.List.NonEmpty.insert
+skip Data.List.NonEmpty.sort
+skip Data.List.NonEmpty.sortBy
+
+## todo
+skip Data.List.NonEmpty.scanl1
+skip Data.List.NonEmpty.reverse
+
+# Needs Alternative
+skip Data.List.NonEmpty.some1
+
+order Data.List.NonEmpty.zipWith Data.List.NonEmpty.Applicative__NonEmpty_op_zlztzg__ Data.List.NonEmpty.Applicative__NonEmpty Data.List.NonEmpty.Monad__NonEmpty_op_zgzg__ Data.List.NonEmpty.Monad__NonEmpty_return_ Data.List.NonEmpty.Monad__NonEmpty
+
+order Data.List.NonEmpty.Eq___NonEmpty Data.List.NonEmpty.Ord___NonEmpty
+
+order Data.List.NonEmpty.Foldable__NonEmpty Data.List.NonEmpty.Traversable__NonEmpty Data.List.NonEmpty.reverse Data.List.NonEmpty.sort Data.List.NonEmpty.sortBy Data.List.NonEmpty.sortWith
+
+# needs Data.OldList.transpose
+skip Data.List.NonEmpty.transpose
+# needs Data.OldList.intersperse
+skip Data.List.NonEmpty.intersperse
+
+skip Data.List.NonEmpty.iterate
+
+skip Data.List.NonEmpty.inits
+
+skip Data.List.NonEmpty.repeat
+
+skip Data.List.NonEmpty.cycle
+
+##???
+skip Data.List.NonEmpty.unfoldr
+
+# actually total, can't tell
+skip Data.List.NonEmpty.scanr1
+skip Data.List.NonEmpty.init
+skip Data.List.NonEmpty.last
+skip Data.List.NonEmpty.unfold
+
+# recursive call to Foldable
+skip Data.List.NonEmpty.groupBy
+skip Data.List.NonEmpty.group
+skip Data.List.NonEmpty.groupWith
+skip Data.List.NonEmpty.groupAllWith
+skip Data.List.NonEmpty.groupBy1
+skip Data.List.NonEmpty.groupWith1
+skip Data.List.NonEmpty.groupAllWith1
+skip Data.List.NonEmpty.group1
+
+
+# Something broke with derived instances (compare gets renamed to the instance’s method,
+# even though it should use GHC.Base.compare) after going to qualified names
+skip Data.List.NonEmpty.Ord__NonEmpty
+#skip Data.List.NonEmpty.Eq___NonEmpty

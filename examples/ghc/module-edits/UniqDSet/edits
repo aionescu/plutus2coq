@@ -1,0 +1,12 @@
+rename type GHC.Num.Int = nat
+
+
+
+order UniqDSet.unionUniqDSets UniqDSet.unionManyUniqDSets
+
+# redefine to not use foldr1
+redefine Definition UniqDSet.unionManyUniqDSets {a} (xs : list (UniqDSet a)) : UniqDSet a :=
+    match xs with
+      | nil => UniqDSet.emptyUniqDSet
+      | cons udset udsets => Data.Foldable.foldr UniqDSet.unionUniqDSets udset udsets
+    end.

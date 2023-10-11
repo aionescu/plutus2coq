@@ -1,0 +1,9 @@
+# debugging, uses List.!!
+skip Core.classSCSelId
+
+# axiomatize definition Core.naturallyCoherentClass
+
+# ppr
+skip Core.pprDefMethInfo
+skip Core.pprFunDep
+skip Core.pprFundeps

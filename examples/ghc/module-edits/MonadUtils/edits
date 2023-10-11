@@ -1,0 +1,12 @@
+axiomatize module MonadUtils
+
+skip module Control.Monad.Fix
+skip module Control.Monad.IO.Class
+
+# partial
+skip MonadUtils.unlessM
+
+skip MonadUtils.liftIO1
+skip MonadUtils.liftIO2
+skip MonadUtils.liftIO3
+skip MonadUtils.liftIO4

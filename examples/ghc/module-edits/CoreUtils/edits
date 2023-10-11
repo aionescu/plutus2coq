@@ -1,0 +1,103 @@
+
+
+###############################################################################
+# edits from skipping Type/Coercion/Tick/Cast
+#
+# takes a list of types as arguments
+# should only succeed if that list is empty
+#
+in CoreUtils.mkAltExpr rewrite forall, Core.Type_ = (GHC.Err.default) 
+
+
+# uses type information to decide
+#
+axiomatize definition CoreUtils.isExpandableApp
+axiomatize definition CoreUtils.isExprLevPoly 
+
+# needs more from PrimOp (IntQuotOp, IntRemOp etc)
+#
+axiomatize definition CoreUtils.isDivOp
+
+# needs more from PrimOp (primOpIsCheap)
+axiomatize definition CoreUtils.isCheapApp 
+
+# refers to skipped components. (Tick)
+# skip CoreUtils.collectMakeStaticArgs
+skip CoreUtils.stripTicksTopT
+skip CoreUtils.stripTicksTop
+skip CoreUtils.mkTick
+skip CoreUtils.mkTicks
+skip CoreUtils.mkTickNoHNF
+skip CoreUtils.tickHNFArgs
+
+###############################################################################
+## termination edits
+
+termination CoreUtils.mergeAlts deferred
+
+# termination issue (recursion through non-lambda value unsupported)
+axiomatize definition CoreUtils.cheapEqExpr'
+ 
+in CoreUtils.eqExpr       inline mutual go_alt
+in CoreUtils.exprIsCheapX inline mutual ok
+
+# Justified by `NestedRecursionHelpers.all2Map_is_all2_map_map` plus changing
+#
+#     let '(xs,ys) := unzip xys in … ys …
+#
+# to
+#
+#     … (map snd xys) …
+in CoreUtils.eqExpr rewrite forall p, Util.all2 p rs1 rs2 = NestedRecursionHelpers.all2Map p snd snd ps1 ps2
+
+# Justified by `NestedRecursionHelpers.all2` plus `map id =1 id`.  Could also
+# work with a better version of `Util.all2`; see issue #109.
+in CoreUtils.eqExpr rewrite forall p, Util.all2 p a1 a2 = NestedRecursionHelpers.all2Map p id id a1 a2
+
+
+in CoreUtils.diffUnfold termination go { measure arg_14__ } 
+obligations CoreUtils.diffUnfold admit
+
+
+in CoreUtils.stripTicksE inline mutual go_b
+in CoreUtils.stripTicksE inline mutual go_a
+in CoreUtils.stripTicksE set type      go_b : (b * Core.Expr b) -> (b * Core.Expr b)
+in CoreUtils.stripTicksE set type      go_a : Core.Alt b        -> Core.Alt b
+
+in CoreUtils.stripTicksT inline mutual go_b
+in CoreUtils.stripTicksT inline mutual go_a
+in CoreUtils.stripTicksT set type      go_b : (b * Core.Expr b) -> OrdList.OrdList (Core.Tickish Core.Id)
+in CoreUtils.stripTicksT set type      go_a : Core.Alt b        -> OrdList.OrdList (Core.Tickish Core.Id)
+
+############################################################
+## skipped methods (I'm not sure why these are skipped)
+
+# needs Platform.Plaform type
+skip CoreUtils.rhsIsStatic
+
+axiomatize definition CoreUtils.applyTypeToArgs
+axiomatize definition CoreUtils.exprType
+axiomatize definition CoreUtils.coreAltType
+axiomatize definition CoreUtils.coreAltsType
+
+
+## needs more from DataCon
+axiomatize definition CoreUtils.dataConInstPat
+axiomatize definition CoreUtils.dataConRepFSInstPat
+axiomatize definition CoreUtils.dataConRepInstPat
+axiomatize definition CoreUtils.refineDefaultAlt
+
+axiomatize definition CoreUtils.diffUnfold
+axiomatize definition CoreUtils.diffIdInfo
+axiomatize definition CoreUtils.diffExpr
+axiomatize definition CoreUtils.diffBinds
+
+
+axiomatize definition CoreUtils.combineIdenticalAlts
+axiomatize definition CoreUtils.tryEtaReduce
+
+axiomatize definition CoreUtils.app_ok
+axiomatize definition CoreUtils.expr_ok
+axiomatize definition CoreUtils.exprOkForSideEffects
+axiomatize definition CoreUtils.exprOkForSpeculation
+axiomatize definition CoreUtils.bindNonRec
