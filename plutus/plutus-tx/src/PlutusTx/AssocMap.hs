@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 {-# LANGUAGE DeriveAnyClass        #-}
 {-# LANGUAGE DeriveDataTypeable    #-}
 {-# LANGUAGE DeriveGeneric         #-}

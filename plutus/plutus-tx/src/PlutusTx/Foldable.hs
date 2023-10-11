@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 {-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -fno-specialise #-}
 {-# OPTIONS_GHC -fno-omit-interface-pragmas #-}

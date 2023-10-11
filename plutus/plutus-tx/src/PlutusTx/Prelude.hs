@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 -- editorconfig-checker-disable-file
 -- Need some extra imports from the Prelude for doctests, annoyingly
 {-# LANGUAGE OverloadedStrings #-}

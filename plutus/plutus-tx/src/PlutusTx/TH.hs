@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 {-# LANGUAGE DataKinds        #-}
 {-# LANGUAGE TemplateHaskell  #-}
 {-# LANGUAGE TypeApplications #-}

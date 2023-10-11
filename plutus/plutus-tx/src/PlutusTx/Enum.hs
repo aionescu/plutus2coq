@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -fno-omit-interface-pragmas #-}
 module PlutusTx.Enum (Enum(..)) where

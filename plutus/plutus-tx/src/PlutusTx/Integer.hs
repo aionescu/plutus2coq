@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 -- editorconfig-checker-disable-file
 module PlutusTx.Integer (Integer) where
 

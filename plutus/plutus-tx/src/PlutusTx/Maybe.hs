@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 {-# OPTIONS_GHC -fno-omit-interface-pragmas #-}
 module PlutusTx.Maybe (Maybe(..), isJust, isNothing, maybe, fromMaybe, mapMaybe) where
 

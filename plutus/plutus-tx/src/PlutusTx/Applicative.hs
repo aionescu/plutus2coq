@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 {-# LANGUAGE InstanceSigs #-}
 
 module PlutusTx.Applicative where

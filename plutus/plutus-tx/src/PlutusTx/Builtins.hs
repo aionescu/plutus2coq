@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 -- editorconfig-checker-disable-file
 
 -- | Primitive names and functions for working with Plutus Core builtins.

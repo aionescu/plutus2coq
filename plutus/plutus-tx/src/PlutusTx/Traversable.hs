@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 -- editorconfig-checker-disable-file
 {-# LANGUAGE TupleSections #-}
 {-# OPTIONS_GHC -fno-omit-interface-pragmas #-}

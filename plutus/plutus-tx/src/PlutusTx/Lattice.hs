@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 {-# LANGUAGE ConstraintKinds #-}
 module PlutusTx.Lattice where
 

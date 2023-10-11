@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 module PlutusTx.Bool (Bool(..), (&&), (||), not, otherwise) where
 
 {-

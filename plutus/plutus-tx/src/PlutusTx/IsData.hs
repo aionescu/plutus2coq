@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude, Strict #-}
 module PlutusTx.IsData (module Export) where
 
 import PlutusTx.IsData.Class as Export
