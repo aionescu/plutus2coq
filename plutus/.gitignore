@@ -1,0 +1,104 @@
+# Latex
+*.dvi
+*.fls
+*.ptb
+*.aux
+*.log
+*.pdf
+*.gz
+*.synctex(busy)
+*.bbl
+*.fdb_latexmk
+*.blg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.ilg
+*.nlo
+*.nls
+*.out
+*.toc
+*.bcf
+*.run.xml
+*.thm
+auto
+
+# Cabal
+.ghc.environment*
+tags
+dist-newstyle
+dist
+cabal-dev
+.cabal-sandbox/
+cabal.sandbox.config
+cabal.config
+cabal.project.local
+
+# Stack
+.stack-work
+stack.yaml.lock
+
+# Haskell output files
+*.o
+*.hi
+*.dyn_o
+*.dyn_hi
+*.chi
+*.chs.h
+*.prof
+.liquid/
+
+# Agda
+*.agdai
+
+# Python
+__pycache__
+
+# Nix
+result*
+pkgs/.cabal
+pkgs/.cache
+pkgs/.stack
+
+# Editor files
+*~
+*#
+*_flymake.*
+.psc-ide-port
+.dir-locals.el
+*.code-workspace
+.*.sw*
+
+# Misc
+act-event.json
+.history/
+.virtualenv
+.vscode/
+.hsenv
+TAGS
+.DS_Store
+.uuid
+.terraform
+*.tfvars
+gh-pages
+.importify/
+.envrc
+.direnv/
+*.db
+*.db-shm
+*.db-wal
+hie.yaml
+node-server.sock*
+node.sock
+**/node?/db
+.pre-commit-config.yaml
+secrets/*/.gpg-id
+ghcid.txt
+plutus-pab/test-node/testnet/db
+plutus-pab/test-node/alonzo-purple/db
+# profiling output files
+*.timelog
+*.stacks
+.nvimrc

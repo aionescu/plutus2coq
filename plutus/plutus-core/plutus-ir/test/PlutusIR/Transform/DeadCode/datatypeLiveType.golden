@@ -1,0 +1,8 @@
+(let
+  (nonrec)
+  (typebind
+    (tyvardecl Maybe (fun (type) (type)))
+    (lam a (type) (all a (type) (fun a a)))
+  )
+  (error Maybe)
+)
