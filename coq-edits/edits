@@ -1,0 +1,38 @@
+# External dependencies, don't care
+skip class Codec.Serialise.Class.Serialise
+skip class Data.Aeson.Types.FromJSON.FromJSON
+skip class Data.Aeson.Types.ToJSON.ToJSON
+skip class Data.ByteArray.Types.ByteArray
+skip class Data.ByteArray.Types.ByteArrayAccess
+skip class Data.Hashable.Class.Hashable
+skip class Data.String.IsString
+skip class Prettyprinter.Internal.Pretty
+
+# Internal dependencies, don't care (should I?)
+axiomatize module PlutusCore.Data
+axiomatize module PlutusTx.Builtins.Internal
+axiomatize module PlutusTx.Lift
+axiomatize module PlutusTx.Lift.Class
+axiomatize module PlutusTx.Lift.TH
+axiomatize module PlutusTx.Lift.THUtils
+axiomatize module PlutusTx.IsData.TH
+axiomatize module PlutusTx.IsData.Class
+axiomatize module PlutusTx.IsData.Instances
+axiomatize module PlutusTx.Code
+axiomatize module PlutusTx.Show.TH
+axiomatize module PlutusTx.TH
+axiomatize module PlutusTx.AsData
+skip class PlutusTx.Show.TH.Show
+
+# Unsupported Haskell syntax/features
+skip class PlutusTx.Numeric.Module
+skip class PlutusTx.Builtins.Class.FromBuiltin
+skip class PlutusTx.Builtins.Class.ToBuiltin
+skip class PlutusTx.Lift.Class.Typeable
+skip class PlutusTx.Lift.Class.Lift
+axiomatize definition PlutusTx.Lift.Class.typeRepBuiltin
+axiomatize definition PlutusTx.AssocMap.keys
+axiomatize definition PlutusTx.AssocMap.elems
+
+# Unbounded recursion
+axiomatize definition PlutusTx.Base.until
