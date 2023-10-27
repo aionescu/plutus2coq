@@ -1,4 +1,52 @@
-# External dependencies, don't care
+skip module Z
+skip module PlutusCore.Data
+skip module PlutusTx.Builtins.Class
+skip module PlutusTx.Lift
+skip module PlutusTx.Lift.Class
+skip module PlutusTx.Lift.TH
+skip module PlutusTx.Lift.THUtils
+skip module PlutusTx.Lift.Instances
+skip module PlutusTx.IsData.TH
+skip module PlutusTx.IsData.Class
+skip module PlutusTx.IsData.Instances
+skip module PlutusTx.IsData
+skip module PlutusTx.Code
+skip module PlutusTx.Show.TH
+skip module PlutusTx.Show
+skip module PlutusTx.TH
+skip module PlutusTx.AsData
+skip module PlutusTx.Coverage
+skip module PlutusTx.Plugin.Utils
+skip module PlutusTx.Utils
+skip module PlutusTx
+skip module PlutusTx.Builtins.Internal
+skip module PlutusTx.Builtins
+
+rename module PlutusTx.These PlutusTx_These
+rename module PlutusTx.Bool PlutusTx_Bool
+rename module PlutusTx.Integer PlutusTx_Integer
+rename module PlutusTx.Base PlutusTx_Base
+rename module PlutusTx.Either PlutusTx_Either
+rename module PlutusTx.Functor PlutusTx_Functor
+rename module PlutusTx.Eq PlutusTx_Eq
+rename module PlutusTx.Ord PlutusTx_Ord
+rename module PlutusTx.ErrorCodes PlutusTx_ErrorCodes
+rename module PlutusTx.Trace PlutusTx_Trace
+rename module PlutusTx.List PlutusTx_List
+rename module PlutusTx.Maybe PlutusTx_Maybe
+rename module PlutusTx.Semigroup PlutusTx_Semigroup
+rename module PlutusTx.Monoid PlutusTx_Monoid
+rename module PlutusTx.Numeric PlutusTx_Numeric
+rename module PlutusTx.Applicative PlutusTx_Applicative
+rename module PlutusTx.Foldable PlutusTx_Foldable
+rename module PlutusTx.Traversable PlutusTx_Traversable
+rename module PlutusTx.Enum PlutusTx_Enum
+rename module PlutusTx.Lattice PlutusTx_Lattice
+rename module PlutusTx.Ratio PlutusTx_Ratio
+rename module PlutusTx.Prelude PlutusTx_Prelude
+rename module PlutusTx.Sqrt PlutusTx_Sqrt
+rename module PlutusTx.AssocMap PlutusTx_AssocMap
+
 skip class Codec.Serialise.Class.Serialise
 skip class Data.Aeson.Types.FromJSON.FromJSON
 skip class Data.Aeson.Types.ToJSON.ToJSON
@@ -7,32 +55,97 @@ skip class Data.ByteArray.Types.ByteArrayAccess
 skip class Data.Hashable.Class.Hashable
 skip class Data.String.IsString
 skip class Prettyprinter.Internal.Pretty
-
-# Internal dependencies, don't care (should I?)
-axiomatize module PlutusCore.Data
-axiomatize module PlutusTx.Builtins.Internal
-axiomatize module PlutusTx.Lift
-axiomatize module PlutusTx.Lift.Class
-axiomatize module PlutusTx.Lift.TH
-axiomatize module PlutusTx.Lift.THUtils
-axiomatize module PlutusTx.IsData.TH
-axiomatize module PlutusTx.IsData.Class
-axiomatize module PlutusTx.IsData.Instances
-axiomatize module PlutusTx.Code
-axiomatize module PlutusTx.Show.TH
-axiomatize module PlutusTx.TH
-axiomatize module PlutusTx.AsData
+skip class GHC.Base.Ord
 skip class PlutusTx.Show.TH.Show
-
-# Unsupported Haskell syntax/features
-skip class PlutusTx.Numeric.Module
+skip class PlutusTx.IsData.Class.ToData
+skip class PlutusTx.IsData.Class.FromData
+skip class PlutusTx.IsData.Class.UnsafeFromData
+skip class PlutusTx_Numeric.Module
 skip class PlutusTx.Builtins.Class.FromBuiltin
 skip class PlutusTx.Builtins.Class.ToBuiltin
 skip class PlutusTx.Lift.Class.Typeable
 skip class PlutusTx.Lift.Class.Lift
-axiomatize definition PlutusTx.Lift.Class.typeRepBuiltin
-axiomatize definition PlutusTx.AssocMap.keys
-axiomatize definition PlutusTx.AssocMap.elems
 
-# Unbounded recursion
-axiomatize definition PlutusTx.Base.until
+skip PlutusTx_Eq.Eq__BuiltinByteString_op_zeze__
+skip PlutusTx_Eq.Eq__BuiltinByteString
+skip PlutusTx_Eq.Eq__BuiltinData_op_zeze__
+skip PlutusTx_Eq.Eq__BuiltinData
+skip PlutusTx_Eq.Eq__BuiltinBLS12_381_G1_Element_op_zeze__
+skip PlutusTx_Eq.Eq__BuiltinBLS12_381_G1_Element
+skip PlutusTx_Eq.Eq__BuiltinBLS12_381_G2_Element_op_zeze__
+skip PlutusTx_Eq.Eq__BuiltinBLS12_381_G2_Element
+skip PlutusTx_Ord.Ord__BuiltinByteString_op_zlze__
+skip PlutusTx_Ord.Ord__BuiltinByteString_compare
+skip PlutusTx_Ord.Ord__BuiltinByteString_max
+skip PlutusTx_Ord.Ord__BuiltinByteString_min
+skip PlutusTx_Ord.Ord__BuiltinByteString_op_zg__
+skip PlutusTx_Ord.Ord__BuiltinByteString_op_zgze__
+skip PlutusTx_Ord.Ord__BuiltinByteString_op_zl__
+skip PlutusTx_Ord.Ord__BuiltinByteString
+skip PlutusTx_ErrorCodes.allErrorCodes
+skip PlutusTx_Semigroup.Semigroup__BuiltinByteString_op_zlzg__
+skip PlutusTx_Semigroup.Semigroup__BuiltinByteString
+skip PlutusTx_Monoid.Monoid__BuiltinByteString_mempty
+skip PlutusTx_Monoid.Monoid__BuiltinByteString
+skip PlutusTx_Numeric.Semiring
+skip PlutusTx_Numeric.Ring
+skip PlutusTx_Foldable.asum
+skip PlutusTx_Lattice.BoundedLattice
+skip PlutusTx_Lattice.Lattice
+skip PlutusTx_Prelude.takeByteString
+skip PlutusTx_Prelude.dropByteString
+
+axiomatize module PlutusTx_ErrorCodes
+axiomatize module PlutusTx_Trace
+
+axiomatize definition PlutusTx_AssocMap.keys
+axiomatize definition PlutusTx_AssocMap.elems
+axiomatize definition PlutusTx_Base.until
+axiomatize definition PlutusTx_List.foldl
+axiomatize definition PlutusTx_List.findIndex
+axiomatize definition PlutusTx_List.replicate
+axiomatize definition PlutusTx_List.sortBy
+axiomatize definition PlutusTx_Foldable.concat
+axiomatize definition PlutusTx_Traversable.foldMapDefault
+axiomatize definition PlutusTx_Enum.enumFromToBool
+axiomatize definition PlutusTx_Enum.enumFromToInteger
+axiomatize definition PlutusTx_Enum.enumFromToOrdering
+axiomatize definition PlutusTx_Ratio.euclid
+axiomatize definition PlutusTx_Ratio.unsafeRatio
+axiomatize definition PlutusTx_Ratio.toGHC
+axiomatize definition PlutusTx_Ratio.fromGHC
+axiomatize definition PlutusTx_Ratio.recip
+axiomatize definition PlutusTx_Ratio.gcd
+axiomatize definition PlutusTx_Sqrt.rsqrt
+axiomatize definition PlutusTx_AssocMap.fmapAssocMap
+axiomatize definition PlutusTx_AssocMap.traverseAssocMap
+axiomatize definition PlutusTx_AssocMap.union
+axiomatize definition PlutusTx_AssocMap.empty
+
+rename type GHC.Integer.Type.Integer = BinNums.Z
+rename type PlutusTx.Builtins.Internal.BuiltinString = String.string
+
+rename value PlutusTx.These.These = PlutusTx_These.MkThese
+rename value PlutusTx.Semigroup.Min = PlutusTx_Semigroup.MkMin
+rename value PlutusTx.Semigroup.Max = PlutusTx_Semigroup.MkMax
+rename value PlutusTx.Numeric.Additive = PlutusTx_Numeric.MkAdditive
+rename value PlutusTx.Numeric.Multiplicative = PlutusTx_Numeric.MkMultiplicative
+rename value PlutusTx.Lattice.Join = PlutusTx_Lattice.MkJoin
+rename value PlutusTx.Lattice.Meet = PlutusTx_Lattice.MkMeet
+rename value PlutusTx.Ratio.Rational = PlutusTx_Ratio.MkRational
+rename value PlutusTx.AssocMap.Map = PlutusTx_AssocMap.MkMap
+rename value PlutusTx.Builtins.equalsInteger = ZArith.BinInt.Z.eqb
+rename value PlutusTx.Builtins.lessThanInteger = ZArith.BinInt.Z.ltb
+rename value PlutusTx.Builtins.greaterThanInteger = ZArith.BinInt.Z.gtb
+rename value PlutusTx.Builtins.lessThanEqualsInteger = ZArith.BinInt.Z.leb
+rename value PlutusTx.Builtins.greaterThanEqualsInteger = ZArith.BinInt.Z.geb
+rename value PlutusTx.Builtins.addInteger = Z.add
+rename value PlutusTx.Builtins.subtractInteger = Z.sub
+rename value PlutusTx.Builtins.multiplyInteger = Z.mul
+rename value PlutusTx.Builtins.modInteger = Z.modulo
+rename value PlutusTx.Builtins.divideInteger = Z.div
+rename value PlutusTx.Builtins.remainderInteger = Z.rem
+rename value PlutusTx.Builtins.quotientInteger = Z.quot
+rename value PlutusTx.Builtins.equalsString = String.eqb
+rename value PlutusTx.Builtins.appendString = String.append
+rename value PlutusTx.Builtins.emptyString = String.EmptyString
