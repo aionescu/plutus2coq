@@ -30,6 +30,11 @@ class Enum a where
   -- | Construct a list from the given range.
   enumFromTo :: a -> a -> [a]
 
+enumFromToInteger :: Integer -> Integer -> [Integer]
+enumFromToInteger x y
+  | x > y = []
+  | otherwise = x : enumFromToInteger (addInteger x 1) y
+
 instance Enum Integer where
   {-# INLINABLE succ #-}
   succ x = addInteger x 1
@@ -44,9 +49,7 @@ instance Enum Integer where
   fromEnum x = x
 
   {-# INLINABLE enumFromTo #-}
-  enumFromTo x y
-    | x > y = []
-    | otherwise = x : enumFromTo (succ x) y
+  enumFromTo = enumFromToInteger
 
 instance Enum () where
   {-# INLINABLE succ #-}
@@ -64,6 +67,9 @@ instance Enum () where
 
   {-# INLINABLE enumFromTo #-}
   enumFromTo _ _ = [()]
+
+enumFromToBool :: Bool -> Bool -> [Bool]
+enumFromToBool x y = map toEnum (enumFromTo (fromEnum x) (fromEnum y))
 
 instance Enum Bool where
   {-# INLINABLE succ #-}
@@ -84,7 +90,10 @@ instance Enum Bool where
   fromEnum True  = 1
 
   {-# INLINABLE enumFromTo #-}
-  enumFromTo x y = map toEnum (enumFromTo (fromEnum x) (fromEnum y))
+  enumFromTo = enumFromToBool
+
+enumFromToOrdering :: Ordering -> Ordering -> [Ordering]
+enumFromToOrdering x y = map toEnum (enumFromTo (fromEnum x) (fromEnum y))
 
 instance Enum Ordering where
   {-# INLINABLE succ #-}
@@ -109,4 +118,4 @@ instance Enum Ordering where
   fromEnum GT = 2
 
   {-# INLINABLE enumFromTo #-}
-  enumFromTo x y = map toEnum (enumFromTo (fromEnum x) (fromEnum y))
+  enumFromTo = enumFromToOrdering

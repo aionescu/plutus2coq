@@ -60,7 +60,7 @@ instance Semigroup a => Semigroup (Dual a) where
 
 instance Semigroup (Endo a) where
     {-# INLINABLE (<>) #-}
-    (<>) = coerce ((.) :: (a -> a) -> (a -> a) -> a -> a)
+    Endo a <> Endo b = Endo (a . b)
 
 instance Semigroup (First a) where
     {-# INLINABLE (<>) #-}
@@ -71,18 +71,18 @@ newtype Max a = Max { getMax :: a }
 
 instance Functor Max where
     {-# INLINABLE fmap #-}
-    fmap = coerce
+    fmap f (Max m) = Max (f m)
 
 instance Ord a => Semigroup (Max a) where
     {-# INLINABLE (<>) #-}
-    (<>) = coerce (max :: a -> a -> a)
+    Max a <> Max b = Max (max a b)
 
 newtype Min a = Min { getMin :: a }
 
 instance Functor Min where
     {-# INLINABLE fmap #-}
-    fmap = coerce
+    fmap f (Min m) = Min (f m)
 
 instance Ord a => Semigroup (Min a) where
     {-# INLINABLE (<>) #-}
-    (<>) = coerce (min :: a -> a -> a)
+    Min a <> Min b = Min (min a b)

@@ -1,4 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude, Strict #-}
+{-# LANGUAGE UndecidableInstances #-}
 -- editorconfig-checker-disable-file
 {-# LANGUAGE ConstraintKinds        #-}
 {-# LANGUAGE FunctionalDependencies #-}
@@ -57,7 +58,7 @@ newtype Additive a = Additive a
 
 instance Semigroup a => AdditiveSemigroup (Additive a) where
     {-# INLINABLE (+) #-}
-    (+) = coerce ((<>) :: a -> a -> a)
+    Additive a + Additive b = Additive (a <> b)
 
 instance Monoid a => AdditiveMonoid (Additive a) where
     {-# INLINABLE zero #-}
@@ -65,7 +66,7 @@ instance Monoid a => AdditiveMonoid (Additive a) where
 
 instance Group a => AdditiveGroup (Additive a) where
     {-# INLINABLE (-) #-}
-    (-) = coerce (gsub :: a -> a -> a)
+    Additive a - Additive b = Additive (gsub a b)
 
 -- | A 'Semigroup' that it is sensible to describe using multiplication.
 class MultiplicativeSemigroup a where
@@ -83,7 +84,7 @@ newtype Multiplicative a = Multiplicative a
 
 instance Semigroup a => MultiplicativeSemigroup (Multiplicative a) where
     {-# INLINABLE (*) #-}
-    (*) = coerce ((<>) :: a -> a -> a)
+    Multiplicative a * Multiplicative b = Multiplicative (a <> b)
 
 instance Monoid a => MultiplicativeMonoid (Multiplicative a) where
     {-# INLINABLE one #-}
@@ -136,7 +137,7 @@ class (Ring s, AdditiveGroup v) => Module s v | v -> s where
 
 instance AdditiveSemigroup a => Semigroup (Sum a) where
     {-# INLINABLE (<>) #-}
-    (<>) = coerce ((+) :: a -> a -> a)
+    Sum a <> Sum b = Sum (a + b)
 
 instance AdditiveMonoid a => Monoid (Sum a) where
     {-# INLINABLE mempty #-}
@@ -144,7 +145,7 @@ instance AdditiveMonoid a => Monoid (Sum a) where
 
 instance MultiplicativeSemigroup a => Semigroup (Product a) where
     {-# INLINABLE (<>) #-}
-    (<>) = coerce ((*) :: a -> a -> a)
+    Product a <> Product b = Product (a * b)
 
 instance MultiplicativeMonoid a => Monoid (Product a) where
     {-# INLINABLE mempty #-}

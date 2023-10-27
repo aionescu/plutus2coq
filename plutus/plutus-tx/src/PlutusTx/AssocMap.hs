@@ -125,17 +125,25 @@ instance (UnsafeFromData k, UnsafeFromData v) => UnsafeFromData (Map k v) where
               )
               ()
 
+fmapAssocMap :: (a -> b) -> Map k a -> Map k b
+fmapAssocMap f (Map mp) = Map (fmap (fmap f) mp)
+{-# INLINEABLE fmapAssocMap #-}
+
 instance Functor (Map k) where
   {-# INLINEABLE fmap #-}
-  fmap f (Map mp) = Map (fmap (fmap f) mp)
+  fmap = fmapAssocMap
 
 instance Foldable (Map k) where
   {-# INLINEABLE foldr #-}
   foldr f z (Map mp) = foldr (f . snd) z mp
 
+traverseAssocMap :: Applicative f => (a -> f b) -> Map k a -> f (Map k b)
+traverseAssocMap f (Map mp) = Map <$> traverse (traverse f) mp
+{-# INLINEABLE traverseAssocMap #-}
+
 instance Traversable (Map k) where
   {-# INLINEABLE traverse #-}
-  traverse f (Map mp) = Map <$> traverse (traverse f) mp
+  traverse = traverseAssocMap
 
 -- This is the "better" instance for Maps that various people
 -- have suggested, which merges conflicting entries with

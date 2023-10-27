@@ -47,11 +47,15 @@ instance Eq Builtins.BuiltinBLS12_381_G2_Element where
     {-# INLINABLE (==) #-}
     (==) = Builtins.bls12_381_G2_equals
 
+eqList :: Eq a => [a] -> [a] -> Bool
+eqList [] []         = True
+eqList (x:xs) (y:ys) = x == y && eqList xs ys
+eqList _ _           = False
+{-# INLINABLE eqList #-}
+
 instance Eq a => Eq [a] where
     {-# INLINABLE (==) #-}
-    [] == []         = True
-    (x:xs) == (y:ys) = x == y && xs == ys
-    _ == _           = False
+    (==) = eqList
 
 instance Eq Bool where
     {-# INLINABLE (==) #-}

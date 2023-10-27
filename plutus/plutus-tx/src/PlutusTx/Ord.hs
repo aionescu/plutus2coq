@@ -80,15 +80,19 @@ instance Ord Builtins.BuiltinByteString where
     {-# INLINABLE (>=) #-}
     (>=) = Builtins.greaterThanEqualsByteString
 
+compareList :: Ord a => [a] -> [a] -> Ordering
+compareList [] []         = EQ
+compareList []     (_:_)  = LT
+compareList (_:_)  []     = GT
+compareList (x:xs) (y:ys) =
+    case compare x y of
+        EQ -> compareList xs ys
+        c  -> c
+{-# INLINABLE compareList #-}
+
 instance Ord a => Ord [a] where
     {-# INLINABLE compare #-}
-    compare []     []     = EQ
-    compare []     (_:_)  = LT
-    compare (_:_)  []     = GT
-    compare (x:xs) (y:ys) =
-        case compare x y of
-            EQ -> compare xs ys
-            c  -> c
+    compare = compareList
 
 instance Ord Bool where
     {-# INLINABLE compare #-}
