@@ -6,7 +6,7 @@ Translating the Plutus standard library to Coq
 
 * GHC 8.10.7
 * Stack 2.11.1
-* Coq 8.10.2 + ssreflect 1.10.0 + itree 3.0.0
+* Coq 8.10.2 + coq-ssreflect 1.10.0 + coq-itree 3.0.0
 
 It's recommended to install GHC and Stack via [GHCup](https://www.haskell.org/ghcup/):
 
@@ -38,34 +38,43 @@ opam update
 opam install coq.8.10.2 coq-mathcomp-ssreflect.1.10.0 coq-itree.3.0.0
 ```
 
-## Building the project
+## Setting up `hs-to-coq`
 
-The first step of building the project is to build `hs-to-coq`:
+There is a one-time setup that must be performed for `hs-to-coq`. The first step is to build it using Stack:
 
 ```bash
 cd hs-to-coq
 stack build
 ```
 
-Then, you should build the Coq translations for Haskell's `base` library:
+Then, build the Coq translations for Haskell's `base` library:
 
 ```bash
-cd base && coq_makefile -f _CoqProject -o Makefile && make -j && cd ..
+cd base     && coq_makefile -f _CoqProject -o Makefile && make -j && cd ..
 cd base-thy && coq_makefile -f _CoqProject -o Makefile && make -j && cd ..
 ```
 
 You might get some Coq warnings, which are safe to ignore.
 
-Once done, don't forget to change back to the repo's root directory:
+Once done, change back to the repo's root directory:
 
 ```bash
 cd ..
 ```
 
-Finally, you can run the main script, `convert.sh`, to translate the Plutus standard library to Coq:
+## Running the project
+
+The translation process is split into three steps:
 
 ```bash
-./scripts/convert.sh
+./scripts/translate.sh # Translate the Plutus files to Coq using hs-to-coq
+./scripts/compile.sh   # Compile the generated Coq code
+./scripts/extract.sh   # Extract the generated Coq code to Haskell
 ```
 
-You will find the output in the `coq-output` directory.
+The final output is a Cabal project containing the extracted Haskell code, in the `coq-extracted` directory:
+
+```shell
+cd coq-extracted
+cabal build
+```
