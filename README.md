@@ -11,8 +11,8 @@ Translating the Plutus standard library to Coq
 It's recommended to install GHC and Stack via [GHCup](https://www.haskell.org/ghcup/):
 
 ```bash
-ghcup install ghc 8.10.7
-ghcup install stack 2.11.1
+ghcup install ghc --set 8.10.7
+ghcup install stack --set 2.11.1
 ```
 
 It's also recommended to configure Stack to resolve GHC versions through GHCup, using [hooks](https://www.haskell.org/ghcup/guide/#strategy-2-stack-hooks-new-recommended):
