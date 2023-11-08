@@ -33,6 +33,8 @@ echo "recommend-stack-upgrade: false" >>~/.stack/config.yaml
 To install Coq 8.10.2 and related packages, it's recommended to use [OPAM](https://opam.ocaml.org/doc/Install.html):
 
 ```bash
+opam switch create plutus2coq 4.09.1
+eval $(opam env --switch=plutus2coq)
 opam repo add coq-released https://coq.inria.fr/opam/released
 opam update
 opam install coq.8.10.2 coq-mathcomp-ssreflect.1.10.0 coq-itree.3.0.0
