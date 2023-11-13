@@ -4,9 +4,20 @@ Translating the Plutus standard library to Coq
 
 ## Installing prerequisites
 
+* libsodium & libblst
 * GHC 8.10.7
 * Stack 2.11.1
-* Coq 8.10.2 + coq-ssreflect 1.10.0 + coq-itree 3.0.0
+* Coq 8.10.2 and packages coq-ssreflect 1.10.0, coq-itree 3.0.0
+
+### System Packages
+
+Plutus depends on the `libsodium` and `libblst` libraries.
+
+On Arch-based Linux distributions, they can be installed through pacman: `sudo pacman -S libsodium libblst`.
+
+On Debian-based distros, only `libsodium` is available via `apt`, and `libblst` has to be built from [source](https://github.com/supranational/blst).
+
+### GHC & Stack
 
 It's recommended to install GHC and Stack via [GHCup](https://www.haskell.org/ghcup/):
 
@@ -29,6 +40,8 @@ Since Stack 2.11.1 is not the newest version, Stack will warn you to upgrade eve
 ```bash
 echo "recommend-stack-upgrade: false" >>~/.stack/config.yaml
 ```
+
+### Coq & Coq packages
 
 To install Coq 8.10.2 and related packages, it's recommended to use [OPAM](https://opam.ocaml.org/doc/Install.html):
 
