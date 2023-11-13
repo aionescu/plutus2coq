@@ -60,3 +60,5 @@ extra-deps:
 - free-5.2
 - foldable1-classes-compat-0.1
 - algebraic-graphs-0.7
+- ral-0.2.1
+- nonempty-vector-0.2.2.0

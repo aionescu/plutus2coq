@@ -191,6 +191,8 @@ library
                      , free
                      , foldable1-classes-compat
                      , algebraic-graphs
+                     , ral
+                     , nonempty-vector
 
   -- These are actually not used directly by hs-to-coq, but work around a
   -- bug(?) in GHC-8.4 that no longer loads other packages if there is a GHC

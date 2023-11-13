@@ -403,6 +403,20 @@ packages:
       size: 4347
   original:
     hackage: algebraic-graphs-0.7
+- completed:
+    hackage: ral-0.2.1@sha256:f87a25d1993a6e32aaa97c81fa84ba071e4134267d44d144dc555e3bb6d4a168,3674
+    pantry-tree:
+      sha256: bb680994bedfee240614f8434a8d7114f577415f01da66a3975b4608ab582c0b
+      size: 937
+  original:
+    hackage: ral-0.2.1
+- completed:
+    hackage: nonempty-vector-0.2.2.0@sha256:df796b25706c5e70ee5490128cbc2070a612f40f5306c538b660f6899a7684a8,1409
+    pantry-tree:
+      sha256: 9c2519f25cea9481143ded5c4bb3d36fd0839f5718967bf3cec27964a5a51e33
+      size: 488
+  original:
+    hackage: nonempty-vector-0.2.2.0
 snapshots:
 - completed:
     sha256: 428ec8d5ce932190d3cbe266b9eb3c175cd81e984babf876b64019e2cbe4ea68
