@@ -1,51 +1,149 @@
-skip module Z
-skip module PlutusCore.Data
-skip module PlutusTx.Builtins.Class
-skip module PlutusTx.Lift
-skip module PlutusTx.Lift.Class
-skip module PlutusTx.Lift.TH
-skip module PlutusTx.Lift.THUtils
-skip module PlutusTx.Lift.Instances
-skip module PlutusTx.IsData.TH
-skip module PlutusTx.IsData.Class
-skip module PlutusTx.IsData.Instances
-skip module PlutusTx.IsData
-skip module PlutusTx.Code
-skip module PlutusTx.Show.TH
-skip module PlutusTx.Show
-skip module PlutusTx.TH
-skip module PlutusTx.AsData
-skip module PlutusTx.Coverage
-skip module PlutusTx.Plugin.Utils
-skip module PlutusTx.Utils
-skip module PlutusTx
-skip module PlutusTx.Builtins.Internal
-skip module PlutusTx.Builtins
+# Module names have to be "flattened", as Coq does not allow extracting modules with hierarchical names.
+rename module PlutusCore.Data                         PlutusCore_Data
+rename module PlutusCore.Evaluation.Result            PlutusCore_Evaluation_Result
+rename module PlutusCore.Builtin.Emitter              PlutusCore_Builtin_Emitter
+rename module PlutusTx.Coverage                       PlutusTx_Coverage
+rename module PlutusTx.Utils                          PlutusTx_Utils
+rename module PlutusTx.Builtins.Internal              PlutusTx_Builtins_Internal
+rename module PlutusTx.Builtins.Class                 PlutusTx_Builtins_Class
+rename module PlutusTx.Builtins                       PlutusTx_Builtins
+rename module PlutusTx.These                          PlutusTx_These
+rename module PlutusTx.Bool                           PlutusTx_Bool
+rename module PlutusTx.Integer                        PlutusTx_Integer
+rename module PlutusTx.Base                           PlutusTx_Base
+rename module PlutusTx.Either                         PlutusTx_Either
+rename module PlutusTx.Functor                        PlutusTx_Functor
+rename module PlutusTx.Eq                             PlutusTx_Eq
+rename module PlutusTx.Ord                            PlutusTx_Ord
+rename module PlutusTx.ErrorCodes                     PlutusTx_ErrorCodes
+rename module PlutusTx.Trace                          PlutusTx_Trace
+rename module PlutusTx.List                           PlutusTx_List
+rename module PlutusTx.Maybe                          PlutusTx_Maybe
+rename module PlutusTx.Semigroup                      PlutusTx_Semigroup
+rename module PlutusTx.Monoid                         PlutusTx_Monoid
+rename module PlutusTx.Numeric                        PlutusTx_Numeric
+rename module PlutusTx.Applicative                    PlutusTx_Applicative
+rename module PlutusTx.Foldable                       PlutusTx_Foldable
+rename module PlutusTx.Traversable                    PlutusTx_Traversable
+rename module PlutusTx.Enum                           PlutusTx_Enum
+rename module PlutusTx.Lattice                        PlutusTx_Lattice
+rename module PlutusTx.Ratio                          PlutusTx_Ratio
+rename module PlutusTx.Prelude                        PlutusTx_Prelude
+rename module PlutusTx.Sqrt                           PlutusTx_Sqrt
+rename module PlutusTx.AssocMap                       PlutusTx_AssocMap
+rename module PlutusTx.Lift.Class                     PlutusTx_Lift_Class
+rename module PlutusTx.Lift.THUtils                   PlutusTx_Lift_THUtils
+rename module PlutusTx.Lift.TH                        PlutusTx_Lift_TH
+rename module PlutusTx.Lift.Instances                 PlutusTx_Lift_Instances
+rename module PlutusTx.Lift                           PlutusTx_Lift
+rename module PlutusTx.Code                           PlutusTx_Code
+rename module PlutusTx.IsData.TH                      PlutusTx_IsData_TH
+rename module PlutusTx.IsData.Class                   PlutusTx_IsData_Class
+rename module PlutusTx.IsData.Instances               PlutusTx_IsData_Instances
+rename module PlutusTx.IsData                         PlutusTx_IsData
+rename module PlutusTx.AsData                         PlutusTx_AsData
+rename module PlutusTx.Show.TH                        PlutusTx_Show_TH
+rename module PlutusTx.Show                           PlutusTx_Show
+rename module PlutusTx.Plugin.Utils                   PlutusTx_Plugin_Utils
+rename module PlutusTx.TH                             PlutusTx_TH
+rename module PlutusLedgerApi.Common.ParamName        PlutusLedgerApi_Common_ParamName
+rename module PlutusLedgerApi.Common.ProtocolVersions PlutusLedgerApi_Common_ProtocolVersions
+rename module PlutusLedgerApi.Common.Versions         PlutusLedgerApi_Common_Versions
+rename module PlutusLedgerApi.Common                  PlutusLedgerApi_Common
+rename module PlutusLedgerApi.V1.Address              PlutusLedgerApi_V1_Address
+rename module PlutusLedgerApi.V1.Bytes                PlutusLedgerApi_V1_Bytes
+rename module PlutusLedgerApi.V1.Tx                   PlutusLedgerApi_V1_Tx
+rename module PlutusLedgerApi.V1.Credential           PlutusLedgerApi_V1_Credential
+rename module PlutusLedgerApi.V1.Contexts             PlutusLedgerApi_V1_Contexts
+rename module PlutusLedgerApi.V1.Crypto               PlutusLedgerApi_V1_Crypto
+rename module PlutusLedgerApi.V1.DCert                PlutusLedgerApi_V1_DCert
+rename module PlutusLedgerApi.V1.EvaluationContext    PlutusLedgerApi_V1_EvaluationContext
+rename module PlutusLedgerApi.V1.Interval             PlutusLedgerApi_V1_Interval
+rename module PlutusLedgerApi.V1.ParamName            PlutusLedgerApi_V1_ParamName
+rename module PlutusLedgerApi.V1.Scripts              PlutusLedgerApi_V1_Scripts
+rename module PlutusLedgerApi.V1.Time                 PlutusLedgerApi_V1_Time
+rename module PlutusLedgerApi.V1.Value                PlutusLedgerApi_V1_Value
+rename module PlutusLedgerApi.V1                      PlutusLedgerApi_V1
+rename module PlutusLedgerApi.V2.Tx                   PlutusLedgerApi_V2_Tx
+rename module PlutusLedgerApi.V2.Contexts             PlutusLedgerApi_V2_Contexts
+rename module PlutusLedgerApi.V2.EvaluationContext    PlutusLedgerApi_V2_EvaluationContext
+rename module PlutusLedgerApi.V2.ParamName            PlutusLedgerApi_V2_ParamName
+rename module PlutusLedgerApi.V2                      PlutusLedgerApi_V2
+rename module PlutusLedgerApi.V3.Contexts             PlutusLedgerApi_V3_Contexts
+rename module PlutusLedgerApi.V3.EvaluationContext    PlutusLedgerApi_V3_EvaluationContext
+rename module PlutusLedgerApi.V3.ParamName            PlutusLedgerApi_V3_ParamName
+rename module PlutusLedgerApi.V3                      PlutusLedgerApi_V3
 
-rename module PlutusTx.These PlutusTx_These
-rename module PlutusTx.Bool PlutusTx_Bool
-rename module PlutusTx.Integer PlutusTx_Integer
-rename module PlutusTx.Base PlutusTx_Base
-rename module PlutusTx.Either PlutusTx_Either
-rename module PlutusTx.Functor PlutusTx_Functor
-rename module PlutusTx.Eq PlutusTx_Eq
-rename module PlutusTx.Ord PlutusTx_Ord
-rename module PlutusTx.ErrorCodes PlutusTx_ErrorCodes
-rename module PlutusTx.Trace PlutusTx_Trace
-rename module PlutusTx.List PlutusTx_List
-rename module PlutusTx.Maybe PlutusTx_Maybe
-rename module PlutusTx.Semigroup PlutusTx_Semigroup
-rename module PlutusTx.Monoid PlutusTx_Monoid
-rename module PlutusTx.Numeric PlutusTx_Numeric
-rename module PlutusTx.Applicative PlutusTx_Applicative
-rename module PlutusTx.Foldable PlutusTx_Foldable
-rename module PlutusTx.Traversable PlutusTx_Traversable
-rename module PlutusTx.Enum PlutusTx_Enum
-rename module PlutusTx.Lattice PlutusTx_Lattice
-rename module PlutusTx.Ratio PlutusTx_Ratio
-rename module PlutusTx.Prelude PlutusTx_Prelude
-rename module PlutusTx.Sqrt PlutusTx_Sqrt
-rename module PlutusTx.AssocMap PlutusTx_AssocMap
+rename type GHC.Integer.Type.Integer                 = BinNums.Z
+rename type PlutusTx_Builtins_Internal.BuiltinString = String.string
+
+rename value PlutusTx.These.These                       = PlutusTx_These.MkThese
+rename value PlutusTx.Semigroup.Min                     = PlutusTx_Semigroup.MkMin
+rename value PlutusTx.Semigroup.Max                     = PlutusTx_Semigroup.MkMax
+rename value PlutusTx.Numeric.Additive                  = PlutusTx_Numeric.MkAdditive
+rename value PlutusTx.Numeric.Multiplicative            = PlutusTx_Numeric.MkMultiplicative
+rename value PlutusTx.Lattice.Join                      = PlutusTx_Lattice.MkJoin
+rename value PlutusTx.Lattice.Meet                      = PlutusTx_Lattice.MkMeet
+rename value PlutusTx.Ratio.Rational                    = PlutusTx_Ratio.MkRational
+rename value PlutusTx.AssocMap.Map                      = PlutusTx_AssocMap.MkMap
+rename value PlutusTx.Builtins.equalsInteger            = ZArith.BinInt.Z.eqb
+rename value PlutusTx.Builtins.lessThanInteger          = ZArith.BinInt.Z.ltb
+rename value PlutusTx.Builtins.greaterThanInteger       = ZArith.BinInt.Z.gtb
+rename value PlutusTx.Builtins.lessThanEqualsInteger    = ZArith.BinInt.Z.leb
+rename value PlutusTx.Builtins.greaterThanEqualsInteger = ZArith.BinInt.Z.geb
+rename value PlutusTx.Builtins.addInteger               = Z.add
+rename value PlutusTx.Builtins.subtractInteger          = Z.sub
+rename value PlutusTx.Builtins.multiplyInteger          = Z.mul
+rename value PlutusTx.Builtins.modInteger               = Z.modulo
+rename value PlutusTx.Builtins.divideInteger            = Z.div
+rename value PlutusTx.Builtins.remainderInteger         = Z.rem
+rename value PlutusTx.Builtins.quotientInteger          = Z.quot
+rename value PlutusTx.Builtins.equalsString             = String.eqb
+rename value PlutusTx.Builtins.appendString             = String.append
+rename value PlutusTx.Builtins.emptyString              = String.EmptyString
+
+axiomatize module PlutusTx_ErrorCodes
+axiomatize module PlutusTx_Trace
+axiomatize module PlutusTx_Lift_Class
+axiomatize module PlutusTx_Lift_THUtils
+axiomatize module PlutusTx_Lift_TH
+axiomatize module PlutusTx_Lift_Instances
+axiomatize module PlutusTx_Lift
+axiomatize module PlutusTx_Code
+axiomatize module PlutusTx_IsData_TH
+axiomatize module PlutusTx_IsData_Class
+axiomatize module PlutusTx_IsData_Instances
+axiomatize module PlutusTx_AsData
+axiomatize module PlutusTx_Show_TH
+axiomatize module PlutusTx_TH
+axiomatize module PlutusTx_Builtins_Internal
+
+axiomatize definition PlutusCore_Data.decodeData
+axiomatize definition PlutusTx_AssocMap.keys
+axiomatize definition PlutusTx_AssocMap.elems
+axiomatize definition PlutusTx_AssocMap.fmapAssocMap
+axiomatize definition PlutusTx_AssocMap.traverseAssocMap
+axiomatize definition PlutusTx_AssocMap.union
+axiomatize definition PlutusTx_AssocMap.empty
+axiomatize definition PlutusTx_Base.until
+axiomatize definition PlutusTx_Enum.enumFromToBool
+axiomatize definition PlutusTx_Enum.enumFromToInteger
+axiomatize definition PlutusTx_Enum.enumFromToOrdering
+axiomatize definition PlutusTx_Foldable.concat
+axiomatize definition PlutusTx_List.foldl
+axiomatize definition PlutusTx_List.findIndex
+axiomatize definition PlutusTx_List.replicate
+axiomatize definition PlutusTx_List.sortBy
+axiomatize definition PlutusTx_Ratio.euclid
+axiomatize definition PlutusTx_Ratio.unsafeRatio
+axiomatize definition PlutusTx_Ratio.toGHC
+axiomatize definition PlutusTx_Ratio.fromGHC
+axiomatize definition PlutusTx_Ratio.recip
+axiomatize definition PlutusTx_Ratio.gcd
+axiomatize definition PlutusTx_Sqrt.rsqrt
+axiomatize definition PlutusTx_Traversable.foldMapDefault
+axiomatize definition PlutusLedgerApi_Common_ParamName.tagWithParamNames
+axiomatize definition PlutusLedgerApi_V1_Value.eq
 
 skip class Codec.Serialise.Class.Serialise
 skip class Data.Aeson.Types.FromJSON.FromJSON
@@ -56,16 +154,19 @@ skip class Data.Hashable.Class.Hashable
 skip class Data.String.IsString
 skip class Prettyprinter.Internal.Pretty
 skip class GHC.Base.Ord
-skip class PlutusTx.Show.TH.Show
-skip class PlutusTx.IsData.Class.ToData
-skip class PlutusTx.IsData.Class.FromData
-skip class PlutusTx.IsData.Class.UnsafeFromData
+skip class PlutusTx_Show_TH.Show
+skip class PlutusTx_IsData_Class.ToData
+skip class PlutusTx_IsData_Class.FromData
+skip class PlutusTx_IsData_Class.UnsafeFromData
 skip class PlutusTx_Numeric.Module
-skip class PlutusTx.Builtins.Class.FromBuiltin
-skip class PlutusTx.Builtins.Class.ToBuiltin
-skip class PlutusTx.Lift.Class.Typeable
-skip class PlutusTx.Lift.Class.Lift
+skip class PlutusTx_Builtins_Class.FromBuiltin
+skip class PlutusTx_Builtins_Class.ToBuiltin
+skip class PlutusTx_Lift_Class.Typeable
+skip class PlutusTx_Lift_Class.Lift
+skip class Text.PrettyBy.Internal.PrettyBy
+skip class PlutusLedgerApi_Common_ParamName.GIsParamName
 
+skip PlutusCore_Evaluation_Result.MonadError__unit__EvaluationResult
 skip PlutusTx_Eq.Eq__BuiltinByteString_op_zeze__
 skip PlutusTx_Eq.Eq__BuiltinByteString
 skip PlutusTx_Eq.Eq__BuiltinData_op_zeze__
@@ -94,58 +195,3 @@ skip PlutusTx_Lattice.BoundedLattice
 skip PlutusTx_Lattice.Lattice
 skip PlutusTx_Prelude.takeByteString
 skip PlutusTx_Prelude.dropByteString
-
-axiomatize module PlutusTx_ErrorCodes
-axiomatize module PlutusTx_Trace
-
-axiomatize definition PlutusTx_AssocMap.keys
-axiomatize definition PlutusTx_AssocMap.elems
-axiomatize definition PlutusTx_Base.until
-axiomatize definition PlutusTx_List.foldl
-axiomatize definition PlutusTx_List.findIndex
-axiomatize definition PlutusTx_List.replicate
-axiomatize definition PlutusTx_List.sortBy
-axiomatize definition PlutusTx_Foldable.concat
-axiomatize definition PlutusTx_Traversable.foldMapDefault
-axiomatize definition PlutusTx_Enum.enumFromToBool
-axiomatize definition PlutusTx_Enum.enumFromToInteger
-axiomatize definition PlutusTx_Enum.enumFromToOrdering
-axiomatize definition PlutusTx_Ratio.euclid
-axiomatize definition PlutusTx_Ratio.unsafeRatio
-axiomatize definition PlutusTx_Ratio.toGHC
-axiomatize definition PlutusTx_Ratio.fromGHC
-axiomatize definition PlutusTx_Ratio.recip
-axiomatize definition PlutusTx_Ratio.gcd
-axiomatize definition PlutusTx_Sqrt.rsqrt
-axiomatize definition PlutusTx_AssocMap.fmapAssocMap
-axiomatize definition PlutusTx_AssocMap.traverseAssocMap
-axiomatize definition PlutusTx_AssocMap.union
-axiomatize definition PlutusTx_AssocMap.empty
-
-rename type GHC.Integer.Type.Integer = BinNums.Z
-rename type PlutusTx.Builtins.Internal.BuiltinString = String.string
-
-rename value PlutusTx.These.These = PlutusTx_These.MkThese
-rename value PlutusTx.Semigroup.Min = PlutusTx_Semigroup.MkMin
-rename value PlutusTx.Semigroup.Max = PlutusTx_Semigroup.MkMax
-rename value PlutusTx.Numeric.Additive = PlutusTx_Numeric.MkAdditive
-rename value PlutusTx.Numeric.Multiplicative = PlutusTx_Numeric.MkMultiplicative
-rename value PlutusTx.Lattice.Join = PlutusTx_Lattice.MkJoin
-rename value PlutusTx.Lattice.Meet = PlutusTx_Lattice.MkMeet
-rename value PlutusTx.Ratio.Rational = PlutusTx_Ratio.MkRational
-rename value PlutusTx.AssocMap.Map = PlutusTx_AssocMap.MkMap
-rename value PlutusTx.Builtins.equalsInteger = ZArith.BinInt.Z.eqb
-rename value PlutusTx.Builtins.lessThanInteger = ZArith.BinInt.Z.ltb
-rename value PlutusTx.Builtins.greaterThanInteger = ZArith.BinInt.Z.gtb
-rename value PlutusTx.Builtins.lessThanEqualsInteger = ZArith.BinInt.Z.leb
-rename value PlutusTx.Builtins.greaterThanEqualsInteger = ZArith.BinInt.Z.geb
-rename value PlutusTx.Builtins.addInteger = Z.add
-rename value PlutusTx.Builtins.subtractInteger = Z.sub
-rename value PlutusTx.Builtins.multiplyInteger = Z.mul
-rename value PlutusTx.Builtins.modInteger = Z.modulo
-rename value PlutusTx.Builtins.divideInteger = Z.div
-rename value PlutusTx.Builtins.remainderInteger = Z.rem
-rename value PlutusTx.Builtins.quotientInteger = Z.quot
-rename value PlutusTx.Builtins.equalsString = String.eqb
-rename value PlutusTx.Builtins.appendString = String.append
-rename value PlutusTx.Builtins.emptyString = String.EmptyString

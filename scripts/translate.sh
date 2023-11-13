@@ -25,6 +25,7 @@ EXTENSIONS=(
   --ghc -XBangPatterns
   --ghc -XTypeFamilies
   --ghc -XLambdaCase
+  --ghc -XMultiParamTypeClasses
 )
 
 IMPORTS=(
@@ -36,22 +37,26 @@ IMPORTS=(
   --import-dir $PLUTUS/plutus-core/index-envs/src
   --import-dir $PLUTUS/plutus-core/untyped-plutus-core/src
   --import-dir $PLUTUS/plutus-tx/src
+  --import-dir $PLUTUS/plutus-ledger-api/src
   --import-dir $PLUTUS/prettyprinter-configurable/src
 )
 
 # The modules to translate to Coq, sorted in dependency order.
 MODULES=(
-  # $PLUTUS/plutus-tx/src/PlutusTx/Coverage.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Utils.hs
+  $PLUTUS/plutus-core/plutus-core/src/PlutusCore/Data.hs
+  $PLUTUS/plutus-core/plutus-core/src/PlutusCore/Evaluation/Result.hs
+  $PLUTUS/plutus-core/plutus-core/src/PlutusCore/Builtin/Emitter.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Coverage.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Utils.hs
   $PLUTUS/plutus-tx/src/PlutusTx/These.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Bool.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Integer.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Base.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Either.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Functor.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Builtins/Internal.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Builtins/Class.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Builtins.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Builtins/Internal.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Builtins/Class.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Builtins.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Eq.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Ord.hs
   $PLUTUS/plutus-tx/src/PlutusTx/ErrorCodes.hs
@@ -66,32 +71,57 @@ MODULES=(
   $PLUTUS/plutus-tx/src/PlutusTx/Traversable.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Enum.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Lattice.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Lift/Class.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Lift/THUtils.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Lift/TH.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Lift/Instances.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Code.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Lift.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/IsData/Class.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/IsData/TH.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/IsData/Instances.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/IsData.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Lift/Class.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Lift/THUtils.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Lift/TH.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Lift/Instances.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Lift.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Code.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/IsData/Class.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/IsData/TH.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/IsData/Instances.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/IsData.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/AsData.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Ratio.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/AsData.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Prelude.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Sqrt.hs
   $PLUTUS/plutus-tx/src/PlutusTx/AssocMap.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Show/TH.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Show.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/Plugin/Utils.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx/TH.hs
-  # $PLUTUS/plutus-tx/src/PlutusTx.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Show/TH.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Show.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Plugin/Utils.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/TH.hs
+  $PLUTUS/plutus-tx/src/PlutusTx.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/Common/ParamName.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/Common/ProtocolVersions.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/Common/Versions.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/Common.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Address.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Bytes.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Tx.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Credential.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Contexts.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Crypto.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/DCert.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/EvaluationContext.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Interval.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/ParamName.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Scripts.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Time.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Value.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V2/Tx.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V2/Contexts.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V2/EvaluationContext.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V2/ParamName.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V2.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V3/Contexts.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V3/EvaluationContext.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V3/ParamName.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V3.hs
 )
 
 [ -n "${1:-}" ] || rm -rf $OUTPUT
 mkdir -p $OUTPUT
-
-cp $ROOT/coq-edits/Extract.v $OUTPUT/Extract.v
 
 modcount=${#MODULES[@]}
 i=0
