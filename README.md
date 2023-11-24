@@ -1,6 +1,6 @@
 # plutus2coq
 
-Translating the Plutus standard library to Coq
+This project aims to enable Plutus smart contract development in Coq, by providing Coq translations of PlutusTx and associated libraries, using `hs-to-coq`.
 
 ## Repository contents
 
