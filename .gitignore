@@ -1,4 +1,12 @@
+# Coq compilation artifacts
+*.vo
+*.glob
+*.aux
+
+# Haskell compilation artifacts
 .ghc-tmp/
 dist-newstyle/
-coq-output/
-coq-extracted/src/
+
+# hs-to-coq artifacts
+*.h2ci
+plutus-coq/

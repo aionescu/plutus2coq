@@ -1,0 +1,377 @@
+# Module names have to be "flattened", as Coq handles hierarchical modules differently to Haskell.
+rename module PlutusCore.Data                         PlutusCore_Data
+rename module PlutusCore.Evaluation.Result            PlutusCore_Evaluation_Result
+rename module PlutusCore.Builtin.Emitter              PlutusCore_Builtin_Emitter
+rename module PlutusTx.Coverage                       PlutusTx_Coverage
+rename module PlutusTx.Utils                          PlutusTx_Utils
+rename module PlutusTx.Builtins.Internal              PlutusTx_Builtins_Internal
+rename module PlutusTx.Builtins.Class                 PlutusTx_Builtins_Class
+rename module PlutusTx.Builtins                       PlutusTx_Builtins
+rename module PlutusTx.These                          PlutusTx_These
+rename module PlutusTx.Bool                           PlutusTx_Bool
+rename module PlutusTx.Integer                        PlutusTx_Integer
+rename module PlutusTx.Base                           PlutusTx_Base
+rename module PlutusTx.Either                         PlutusTx_Either
+rename module PlutusTx.Functor                        PlutusTx_Functor
+rename module PlutusTx.Eq                             PlutusTx_Eq
+rename module PlutusTx.Ord                            PlutusTx_Ord
+rename module PlutusTx.ErrorCodes                     PlutusTx_ErrorCodes
+rename module PlutusTx.Trace                          PlutusTx_Trace
+rename module PlutusTx.List                           PlutusTx_List
+rename module PlutusTx.Maybe                          PlutusTx_Maybe
+rename module PlutusTx.Semigroup                      PlutusTx_Semigroup
+rename module PlutusTx.Monoid                         PlutusTx_Monoid
+rename module PlutusTx.Numeric                        PlutusTx_Numeric
+rename module PlutusTx.Applicative                    PlutusTx_Applicative
+rename module PlutusTx.Foldable                       PlutusTx_Foldable
+rename module PlutusTx.Traversable                    PlutusTx_Traversable
+rename module PlutusTx.Enum                           PlutusTx_Enum
+rename module PlutusTx.Lattice                        PlutusTx_Lattice
+rename module PlutusTx.Ratio                          PlutusTx_Ratio
+rename module PlutusTx.Prelude                        PlutusTx_Prelude
+rename module PlutusTx.Sqrt                           PlutusTx_Sqrt
+rename module PlutusTx.AssocMap                       PlutusTx_AssocMap
+rename module PlutusTx.Lift.Class                     PlutusTx_Lift_Class
+rename module PlutusTx.Lift.THUtils                   PlutusTx_Lift_THUtils
+rename module PlutusTx.Lift.TH                        PlutusTx_Lift_TH
+rename module PlutusTx.Lift.Instances                 PlutusTx_Lift_Instances
+rename module PlutusTx.Lift                           PlutusTx_Lift
+rename module PlutusTx.Code                           PlutusTx_Code
+rename module PlutusTx.IsData.TH                      PlutusTx_IsData_TH
+rename module PlutusTx.IsData.Class                   PlutusTx_IsData_Class
+rename module PlutusTx.IsData.Instances               PlutusTx_IsData_Instances
+rename module PlutusTx.IsData                         PlutusTx_IsData
+rename module PlutusTx.AsData                         PlutusTx_AsData
+rename module PlutusTx.Show.TH                        PlutusTx_Show_TH
+rename module PlutusTx.Show                           PlutusTx_Show
+rename module PlutusTx.Plugin.Utils                   PlutusTx_Plugin_Utils
+rename module PlutusTx.TH                             PlutusTx_TH
+rename module PlutusLedgerApi.Common.ParamName        PlutusLedgerApi_Common_ParamName
+rename module PlutusLedgerApi.Common.ProtocolVersions PlutusLedgerApi_Common_ProtocolVersions
+rename module PlutusLedgerApi.Common.Versions         PlutusLedgerApi_Common_Versions
+rename module PlutusLedgerApi.Common                  PlutusLedgerApi_Common
+rename module PlutusLedgerApi.V1.Address              PlutusLedgerApi_V1_Address
+rename module PlutusLedgerApi.V1.Bytes                PlutusLedgerApi_V1_Bytes
+rename module PlutusLedgerApi.V1.Tx                   PlutusLedgerApi_V1_Tx
+rename module PlutusLedgerApi.V1.Credential           PlutusLedgerApi_V1_Credential
+rename module PlutusLedgerApi.V1.Contexts             PlutusLedgerApi_V1_Contexts
+rename module PlutusLedgerApi.V1.Crypto               PlutusLedgerApi_V1_Crypto
+rename module PlutusLedgerApi.V1.DCert                PlutusLedgerApi_V1_DCert
+rename module PlutusLedgerApi.V1.EvaluationContext    PlutusLedgerApi_V1_EvaluationContext
+rename module PlutusLedgerApi.V1.Interval             PlutusLedgerApi_V1_Interval
+rename module PlutusLedgerApi.V1.ParamName            PlutusLedgerApi_V1_ParamName
+rename module PlutusLedgerApi.V1.Scripts              PlutusLedgerApi_V1_Scripts
+rename module PlutusLedgerApi.V1.Time                 PlutusLedgerApi_V1_Time
+rename module PlutusLedgerApi.V1.Value                PlutusLedgerApi_V1_Value
+rename module PlutusLedgerApi.V1                      PlutusLedgerApi_V1
+rename module PlutusLedgerApi.V2.Tx                   PlutusLedgerApi_V2_Tx
+rename module PlutusLedgerApi.V2.Contexts             PlutusLedgerApi_V2_Contexts
+rename module PlutusLedgerApi.V2.EvaluationContext    PlutusLedgerApi_V2_EvaluationContext
+rename module PlutusLedgerApi.V2.ParamName            PlutusLedgerApi_V2_ParamName
+rename module PlutusLedgerApi.V2                      PlutusLedgerApi_V2
+rename module PlutusLedgerApi.V3.Contexts             PlutusLedgerApi_V3_Contexts
+rename module PlutusLedgerApi.V3.EvaluationContext    PlutusLedgerApi_V3_EvaluationContext
+rename module PlutusLedgerApi.V3.ParamName            PlutusLedgerApi_V3_ParamName
+rename module PlutusLedgerApi.V3                      PlutusLedgerApi_V3
+
+rename type Data.Kind.Type                           = Type
+rename type GHC.Type.Type_                           = Type
+rename type GHC.Integer.Type.Integer                 = BinNums.Z
+rename type Control.Monad.Trans.Writer.Strict.Writer = GHC.Tuple.(,)
+rename type Data.DList.Internal.DList                = list
+rename type Data.ByteString.Internal.ByteString      = String.string
+rename type Data.ByteString.Lazy.Internal.ByteString = String.string
+rename type Data.Text.Internal.Text                  = String.string
+
+rename value PlutusCore.Builtin.Emitter.Emitter                  = PlutusCore_Builtin_Emitter.MkEmitter
+rename value PlutusTx.Builtins.Internal.BuiltinUnit              = PlutusTx_Builtins_Internal.MkBuiltinUnit
+rename value PlutusTx.Builtins.Internal.BuiltinString            = PlutusTx_Builtins_Internal.MkBuiltinString
+rename value PlutusTx.Builtins.Internal.BuiltinPair              = PlutusTx_Builtins_Internal.MkBuiltinPair
+rename value PlutusTx.Builtins.Internal.BuiltinList              = PlutusTx_Builtins_Internal.MkBuiltinList
+rename value PlutusTx.Builtins.Internal.BuiltinData              = PlutusTx_Builtins_Internal.MkBuiltinData
+rename value PlutusTx.Builtins.Internal.BuiltinByteString        = PlutusTx_Builtins_Internal.MkBuiltinByteString
+rename value PlutusTx.Builtins.Internal.BuiltinBool              = PlutusTx_Builtins_Internal.MkBuiltinBool
+rename value PlutusTx.Builtins.equalsInteger                     = ZArith.BinInt.Z.eqb
+rename value PlutusTx.Builtins.lessThanInteger                   = ZArith.BinInt.Z.ltb
+rename value PlutusTx.Builtins.greaterThanInteger                = ZArith.BinInt.Z.gtb
+rename value PlutusTx.Builtins.lessThanEqualsInteger             = ZArith.BinInt.Z.leb
+rename value PlutusTx.Builtins.greaterThanEqualsInteger          = ZArith.BinInt.Z.geb
+rename value PlutusTx.Builtins.addInteger                        = Z.add
+rename value PlutusTx.Builtins.subtractInteger                   = Z.sub
+rename value PlutusTx.Builtins.multiplyInteger                   = Z.mul
+rename value PlutusTx.Builtins.modInteger                        = Z.modulo
+rename value PlutusTx.Builtins.divideInteger                     = Z.div
+rename value PlutusTx.Builtins.remainderInteger                  = Z.rem
+rename value PlutusTx.Builtins.quotientInteger                   = Z.quot
+rename value PlutusTx.These.These                                = PlutusTx_These.MkThese
+rename value PlutusTx.Semigroup.Min                              = PlutusTx_Semigroup.MkMin
+rename value PlutusTx.Semigroup.Max                              = PlutusTx_Semigroup.MkMax
+rename value PlutusTx.Numeric.Additive                           = PlutusTx_Numeric.MkAdditive
+rename value PlutusTx.Numeric.Multiplicative                     = PlutusTx_Numeric.MkMultiplicative
+rename value PlutusTx.Lattice.Join                               = PlutusTx_Lattice.MkJoin
+rename value PlutusTx.Lattice.Meet                               = PlutusTx_Lattice.MkMeet
+rename value PlutusTx.Ratio.Rational                             = PlutusTx_Ratio.MkRational
+rename value PlutusTx.AssocMap.Map                               = PlutusTx_AssocMap.MkMap
+rename value PlutusLedgerApi.V1.Crypto.PubKeyHash                = PlutusLedgerApi_V1_Crypto.MkPubKeyHash
+rename value PlutusLedgerApi.V1.Scripts.ScriptHash               = PlutusLedgerApi_V1_Scripts.MkScriptHash
+rename value PlutusLedgerApi.V1.Scripts.RedeemerHash             = PlutusLedgerApi_V1_Scripts.MkRedeemerHash
+rename value PlutusLedgerApi.V1.Scripts.Redeemer                 = PlutusLedgerApi_V1_Scripts.MkRedeemer
+rename value PlutusLedgerApi.V1.Scripts.DatumHash                = PlutusLedgerApi_V1_Scripts.MkDatumHash
+rename value PlutusLedgerApi.V1.Scripts.Datum                    = PlutusLedgerApi_V1_Scripts.MkDatum
+rename value PlutusLedgerApi.V1.Scripts.Context                  = PlutusLedgerApi_V1_Scripts.MkContext
+rename value PlutusLedgerApi.V1.Address.Address                  = PlutusLedgerApi_V1_Address.MkAddress
+rename value PlutusLedgerApi.V1.Bytes.LedgerBytes                = PlutusLedgerApi_V1_Bytes.MkLedgerBytes
+rename value PlutusLedgerApi.V1.Value.TokenName                  = PlutusLedgerApi_V1_Value.MkTokenName
+rename value PlutusLedgerApi.V1.Value.CurrencySymbol             = PlutusLedgerApi_V1_Value.MkCurrencySymbol
+rename value PlutusLedgerApi.V1.Value.Value                      = PlutusLedgerApi_V1_Value.MkValue
+rename value PlutusLedgerApi.V1.Value.AssetClass                 = PlutusLedgerApi_V1_Value.MkAssetClass
+rename value PlutusLedgerApi.V1.Tx.TxOut                         = PlutusLedgerApi_V1_Tx.MkTxOut
+rename value PlutusLedgerApi.V1.Tx.TxId                          = PlutusLedgerApi_V1_Tx.MkTxId
+rename value PlutusLedgerApi.V1.Tx.TxOutRef                      = PlutusLedgerApi_V1_Tx.MkTxOutRef
+rename value PlutusLedgerApi.V1.Tx.RedeemerPtr                   = PlutusLedgerApi_V1_Tx.MkRedeemerPtr
+rename value PlutusLedgerApi.V1.Interval.Interval                = PlutusLedgerApi_V1_Interval.MkInterval
+rename value PlutusLedgerApi.V1.Interval.UpperBound              = PlutusLedgerApi_V1_Interval.MkUpperBound
+rename value PlutusLedgerApi.V1.Interval.LowerBound              = PlutusLedgerApi_V1_Interval.MkLowerBound
+rename value PlutusLedgerApi.V1.Time.DiffMilliSeconds            = PlutusLedgerApi_V1_Time.MkDiffMilliSeconds
+rename value PlutusLedgerApi.V1.Time.POSIXTime                   = PlutusLedgerApi_V1_Time.MkPOSIXTime
+rename value PlutusLedgerApi.V1.Contexts.TxInInfo                = PlutusLedgerApi_V1_Contexts.MkTxInInfo
+rename value PlutusLedgerApi.V1.Contexts.TxInfo                  = PlutusLedgerApi_V1_Contexts.MkTxInfo
+rename value PlutusLedgerApi.V1.Contexts.ScriptContext           = PlutusLedgerApi_V1_Contexts.MkScriptContext
+rename value PlutusLedgerApi.V2.Tx.OutputDatum                   = PlutusLedgerApi_V2_Tx.MkOutputDatum
+rename value PlutusLedgerApi.V2.Tx.TxOut                         = PlutusLedgerApi_V2_Tx.MkTxOut
+rename value PlutusLedgerApi.V2.Contexts.TxInInfo                = PlutusLedgerApi_V2_Contexts.MkTxInInfo
+rename value PlutusLedgerApi.V2.Contexts.TxInfo                  = PlutusLedgerApi_V2_Contexts.MkTxInfo
+rename value PlutusLedgerApi.V2.Contexts.ScriptContext           = PlutusLedgerApi_V2_Contexts.MkScriptContext
+rename value PlutusLedgerApi.V3.Contexts.ProtocolVersion         = PlutusLedgerApi_V3_Contexts.MkProtocolVersion
+rename value PlutusLedgerApi.V3.Contexts.HotCommitteeCredential  = PlutusLedgerApi_V3_Contexts.MkHotCommitteeCredential
+rename value PlutusLedgerApi.V3.Contexts.GovernanceActionId      = PlutusLedgerApi_V3_Contexts.MkGovernanceActionId
+rename value PlutusLedgerApi.V3.Contexts.DRepCredential          = PlutusLedgerApi_V3_Contexts.MkDRepCredential
+rename value PlutusLedgerApi.V3.Contexts.DRep                    = PlutusLedgerApi_V3_Contexts.MkDRep
+rename value PlutusLedgerApi.V3.Contexts.Constitution            = PlutusLedgerApi_V3_Contexts.MkConstitution
+rename value PlutusLedgerApi.V3.Contexts.ColdCommitteeCredential = PlutusLedgerApi_V3_Contexts.MkColdCommitteeCredential
+rename value PlutusLedgerApi.V3.Contexts.Committee               = PlutusLedgerApi_V3_Contexts.MkCommittee
+rename value PlutusLedgerApi.V3.Contexts.ChangedParameters       = PlutusLedgerApi_V3_Contexts.MkChangedParameters
+rename value PlutusLedgerApi.V3.Contexts.ProposalProcedure       = PlutusLedgerApi_V3_Contexts.MkProposalProcedure
+rename value PlutusLedgerApi.V3.Contexts.TxInfo                  = PlutusLedgerApi_V3_Contexts.MkTxInfo
+rename value PlutusLedgerApi.V3.Contexts.ScriptContext           = PlutusLedgerApi_V3_Contexts.MkScriptContext
+
+axiomatize module PlutusCore_Builtin_Emitter
+axiomatize module PlutusTx_Builtins_Internal
+axiomatize module PlutusTx_Builtins
+axiomatize module PlutusTx_ErrorCodes
+axiomatize module PlutusTx_Trace
+axiomatize module PlutusTx_Lift_Class
+axiomatize module PlutusTx_Lift_THUtils
+axiomatize module PlutusTx_Lift_TH
+axiomatize module PlutusTx_Lift_Instances
+axiomatize module PlutusTx_Lift
+axiomatize module PlutusTx_Code
+axiomatize module PlutusTx_IsData_TH
+axiomatize module PlutusTx_IsData_Class
+axiomatize module PlutusTx_IsData_Instances
+axiomatize module PlutusTx_AsData
+axiomatize module PlutusTx_Show_TH
+axiomatize module PlutusTx_TH
+axiomatize module PlutusLedgerApi_V1_Bytes
+axiomatize module PlutusLedgerApi_V1_Value
+axiomatize module PlutusLedgerApi_V1_Tx
+axiomatize module PlutusLedgerApi_V1_Contexts
+axiomatize module PlutusLedgerApi_V2_Tx
+axiomatize module PlutusLedgerApi_V2_Contexts
+
+axiomatize definition PlutusCore_Evaluation_Result.isEvaluationSuccess
+axiomatize definition PlutusCore_Evaluation_Result.isEvaluationFailure
+axiomatize definition PlutusCore_Data.decodeData
+axiomatize definition PlutusTx_Builtins_Class.stringToBuiltinString
+axiomatize definition PlutusTx_Base.until
+axiomatize definition PlutusTx_Traversable.foldMapDefault
+axiomatize definition PlutusTx_Enum.enumFromToBool
+axiomatize definition PlutusTx_Enum.enumFromToInteger
+axiomatize definition PlutusTx_Enum.enumFromToOrdering
+axiomatize definition PlutusTx_Foldable.concat
+axiomatize definition PlutusTx_List.foldl
+axiomatize definition PlutusTx_List.findIndex
+axiomatize definition PlutusTx_List.replicate
+axiomatize definition PlutusTx_List.sortBy
+axiomatize definition PlutusTx_Ratio.euclid
+axiomatize definition PlutusTx_Ratio.unsafeRatio
+axiomatize definition PlutusTx_Ratio.toGHC
+axiomatize definition PlutusTx_Ratio.fromGHC
+axiomatize definition PlutusTx_Ratio.recip
+axiomatize definition PlutusTx_Ratio.gcd
+axiomatize definition PlutusTx_Sqrt.rsqrt
+axiomatize definition PlutusTx_AssocMap.keys
+axiomatize definition PlutusTx_AssocMap.elems
+axiomatize definition PlutusTx_AssocMap.fmapAssocMap
+axiomatize definition PlutusTx_AssocMap.traverseAssocMap
+axiomatize definition PlutusTx_AssocMap.union
+axiomatize definition PlutusTx_AssocMap.empty
+axiomatize definition PlutusLedgerApi_Common_ParamName.tagWithParamNames
+axiomatize definition PlutusLedgerApi_V1_Value.eq
+axiomatize definition PlutusLedgerApi_V1_Credential.Eq__Credential
+axiomatize definition PlutusLedgerApi_V1_Credential.Eq__StakingCredential
+
+skip module Z
+
+skip class GHC.Base.Ord
+skip class GHC.Base.Semigroup
+skip class GHC.Base.Monoid
+skip class Data.String.IsString
+skip class Data.Hashable.Class.Hashable
+skip class Data.ByteArray.Types.ByteArray
+skip class Data.ByteArray.Types.ByteArrayAccess
+skip class Data.Aeson.Types.FromJSON.FromJSON
+skip class Data.Aeson.Types.ToJSON.ToJSON
+skip class Codec.Serialise.Class.Serialise
+skip class Text.PrettyBy.Internal.PrettyBy
+skip class Prettyprinter.Internal.Pretty
+skip class HsToCoq.Err.Default
+skip class PlutusCore_Evaluation_Result.AsEvaluationFailure
+skip class PlutusTx_Builtins_Class.FromBuiltin
+skip class PlutusTx_Builtins_Class.ToBuiltin
+skip class PlutusTx_IsData_Class.ToData
+skip class PlutusTx_IsData_Class.FromData
+skip class PlutusTx_IsData_Class.UnsafeFromData
+skip class PlutusTx_Lift_Class.Typeable
+skip class PlutusTx_Lift_Class.Lift
+skip class PlutusTx_Numeric.Module
+skip class PlutusTx_Show_TH.Show
+skip class PlutusLedgerApi_Common_ParamName.GIsParamName
+
+skip constructor PlutusTx_Builtins_Internal.BuiltinBLS12_381_MlResult
+skip constructor PlutusTx_Builtins_Internal.BuiltinBLS12_381_G2_Element
+skip constructor PlutusTx_Builtins_Internal.BuiltinBLS12_381_G1_Element
+
+skip ZArith.BinInt.Z.eqb
+skip ZArith.BinInt.Z.ltb
+skip ZArith.BinInt.Z.gtb
+skip ZArith.BinInt.Z.leb
+skip ZArith.BinInt.Z.geb
+skip Z.add
+skip Z.sub
+skip Z.mul
+skip Z.modulo
+skip Z.div
+skip Z.rem
+skip Z.quot
+skip String.eqb
+skip String.append
+skip String.EmptyString
+
+skip PlutusCore_Evaluation_Result.MonadError__unit__EvaluationResult
+skip PlutusCore_Evaluation_Result.Applicative__EvaluationResult
+skip PlutusCore_Evaluation_Result.Monad__EvaluationResult
+skip PlutusCore_Evaluation_Result.MonadFail__EvaluationResult
+skip PlutusCore_Evaluation_Result.evaluationFailure
+skip PlutusCore_Evaluation_Result._EvaluationFailureVia
+skip PlutusCore_Data.encodeData
+skip PlutusCore_Data.encodeInteger
+skip PlutusCore_Data.encodeBs
+skip PlutusCore_Data.decodeData
+skip PlutusCore_Data.decodeBoundedBigInteger
+skip PlutusCore_Data.decodeBoundedBytesIndef
+skip PlutusCore_Data.decodeBoundedBytesIndefLen
+skip PlutusCore_Data.decodeBoundedBytes
+skip PlutusCore_Data.decodeList
+skip PlutusCore_Data.decodeListOf
+skip PlutusCore_Data.decodeMap
+skip PlutusCore_Data.decodeConstr
+skip PlutusCore_Data.integerToBytes
+skip PlutusCore_Data.to64ByteChunks
+skip PlutusTx_Builtins_Internal.traceAll
+skip PlutusTx_Eq.Eq__BuiltinByteString_op_zeze__
+skip PlutusTx_Eq.Eq__BuiltinByteString
+skip PlutusTx_Eq.Eq__BuiltinData_op_zeze__
+skip PlutusTx_Eq.Eq__BuiltinData
+skip PlutusTx_Eq.Eq__BuiltinBLS12_381_G1_Element_op_zeze__
+skip PlutusTx_Eq.Eq__BuiltinBLS12_381_G1_Element
+skip PlutusTx_Eq.Eq__BuiltinBLS12_381_G2_Element_op_zeze__
+skip PlutusTx_Eq.Eq__BuiltinBLS12_381_G2_Element
+skip PlutusTx_Ord.Ord__BuiltinByteString_op_zlze__
+skip PlutusTx_Ord.Ord__BuiltinByteString_compare
+skip PlutusTx_Ord.Ord__BuiltinByteString_max
+skip PlutusTx_Ord.Ord__BuiltinByteString_min
+skip PlutusTx_Ord.Ord__BuiltinByteString_op_zg__
+skip PlutusTx_Ord.Ord__BuiltinByteString_op_zgze__
+skip PlutusTx_Ord.Ord__BuiltinByteString_op_zl__
+skip PlutusTx_Ord.Ord__BuiltinByteString
+skip PlutusTx_ErrorCodes.allErrorCodes
+skip PlutusTx_Semigroup.Semigroup__BuiltinByteString_op_zlzg__
+skip PlutusTx_Semigroup.Semigroup__BuiltinByteString
+skip PlutusTx_Monoid.Monoid__BuiltinByteString_mempty
+skip PlutusTx_Monoid.Monoid__BuiltinByteString
+skip PlutusTx_Numeric.Semiring
+skip PlutusTx_Numeric.Ring
+skip PlutusTx_Foldable.asum
+skip PlutusTx_Lattice.BoundedLattice
+skip PlutusTx_Lattice.Lattice
+skip PlutusTx_Prelude.takeByteString
+skip PlutusTx_Prelude.dropByteString
+skip PlutusLedgerApi_V1_Crypto.Default__PubKeyHash
+skip PlutusLedgerApi_V1_Scripts.Default__ScriptHash
+skip PlutusLedgerApi_V1_Scripts.Default__Redeemer
+skip PlutusLedgerApi_V1_Scripts.Default__Datum
+skip PlutusLedgerApi_V1_Address.Default__Address
+skip PlutusLedgerApi_V1_Bytes.Default__LedgerBytesError
+skip PlutusLedgerApi_V1_Bytes.Default__LedgerBytes
+skip PlutusLedgerApi_V1_Value.Default__TokenName
+skip PlutusLedgerApi_V1_Value.Default__CurrencySymbol
+skip PlutusLedgerApi_V1_Value.Default__Value
+skip PlutusLedgerApi_V1_Value.Default__AssetClass
+skip PlutusLedgerApi_V1_Tx.Redeemers
+skip PlutusLedgerApi_V1_Tx.Default__TxOut
+skip PlutusLedgerApi_V1_Tx.Default__TxId
+skip PlutusLedgerApi_V1_Tx.Default__TxOutRef
+skip PlutusLedgerApi_V1_Tx.Default__ScriptTag
+skip PlutusLedgerApi_V1_Tx.outAddress
+skip PlutusLedgerApi_V1_Tx.outValue
+skip PlutusLedgerApi_V1_DCert.Eq__DCert
+skip PlutusLedgerApi_V1_Contexts.Default__TxInInfo
+skip PlutusLedgerApi_V1_Contexts.Default__TxInfo
+skip PlutusLedgerApi_V1_Contexts.Default__ScriptContext
+skip PlutusLedgerApi_V1_Contexts.Eq__TxInfo
+skip PlutusLedgerApi_V1_Contexts.Eq__TxInInfo
+skip PlutusLedgerApi_V1_Contexts.Eq__ScriptPurpose
+skip PlutusLedgerApi_V1_Contexts.Eq__ScriptContext
+skip PlutusLedgerApi_V2_Tx.Default__OutputDatum
+skip PlutusLedgerApi_V2_Tx.Default__TxOut
+skip PlutusLedgerApi_V2_Tx.outAddress
+skip PlutusLedgerApi_V2_Tx.outDatum
+skip PlutusLedgerApi_V2_Tx.outValue
+skip PlutusLedgerApi_V2_Tx.outReferenceScript
+skip PlutusLedgerApi_V2_Contexts.Default__TxInInfo
+skip PlutusLedgerApi_V2_Contexts.Default__TxInfo
+skip PlutusLedgerApi_V2_Contexts.Default__ScriptContext
+skip PlutusLedgerApi_V2_Contexts.Eq__TxInfo
+skip PlutusLedgerApi_V2_Contexts.Eq__TxInInfo
+skip PlutusLedgerApi_V2_Contexts.Eq__ScriptContext
+skip PlutusLedgerApi_V3_Contexts.Default__Vote
+skip PlutusLedgerApi_V3_Contexts.Default__ProtocolVersion
+skip PlutusLedgerApi_V3_Contexts.Default__GovernanceActionId
+skip PlutusLedgerApi_V3_Contexts.Default__DRep
+skip PlutusLedgerApi_V3_Contexts.Default__Constitution
+skip PlutusLedgerApi_V3_Contexts.Default__Committee
+skip PlutusLedgerApi_V3_Contexts.Default__ChangedParameters
+skip PlutusLedgerApi_V3_Contexts.Default__GovernanceAction
+skip PlutusLedgerApi_V3_Contexts.Default__ProposalProcedure
+skip PlutusLedgerApi_V3_Contexts.Default__TxInfo
+skip PlutusLedgerApi_V3_Contexts.Default__ScriptContext
+skip PlutusLedgerApi_V3_Contexts.Eq__Vote
+skip PlutusLedgerApi_V3_Contexts.Eq__ProtocolVersion
+skip PlutusLedgerApi_V3_Contexts.Eq__GovernanceActionId
+skip PlutusLedgerApi_V3_Contexts.Eq__DRep
+skip PlutusLedgerApi_V3_Contexts.Eq__Constitution
+skip PlutusLedgerApi_V3_Contexts.Eq__Committee
+skip PlutusLedgerApi_V3_Contexts.Eq__ChangedParameters
+skip PlutusLedgerApi_V3_Contexts.Eq__GovernanceAction
+skip PlutusLedgerApi_V3_Contexts.Eq__ProposalProcedure
+skip PlutusLedgerApi_V3_Contexts.Eq__TxInfo
+skip PlutusLedgerApi_V3_Contexts.Eq__ScriptContext
+skip PlutusLedgerApi_V3_Contexts.Eq__Delegatee
+skip PlutusLedgerApi_V3_Contexts.Eq__TxCert
+skip PlutusLedgerApi_V3_Contexts.Eq__Voter
+skip PlutusLedgerApi_V3_Contexts.Eq__ScriptPurpose
+
+order PlutusLedgerApi_V1_Credential.Eq__Credential PlutusLedgerApi_V1_Credential.Eq__StakingCredential
+order PlutusLedgerApi_V1_Value.AdditiveSemigroup__Value PlutusLedgerApi_V1_Value.AdditiveMonoid__Value PlutusLedgerApi_V1_Value.AdditiveGroup__Value
+order PlutusLedgerApi_V1_Interval.Functor__Extended_fmap PlutusLedgerApi_V1_Interval.Functor__Extended PlutusLedgerApi_V1_Interval.Functor__LowerBound_fmap PlutusLedgerApi_V1_Interval.Functor__LowerBound PlutusLedgerApi_V1_Interval.Functor__UpperBound_fmap PlutusLedgerApi_V1_Interval.Functor__UpperBound PlutusLedgerApi_V1_Interval.Functor__Interval_fmap PlutusLedgerApi_V1_Interval.Functor__Interval

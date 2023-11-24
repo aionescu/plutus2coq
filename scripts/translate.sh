@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# This script translates PlutusTx and related modules to Coq using hs-to-coq.
+
+# Specify all dirs relative to repo root, to allow running the script anywhere within the repo.
 ROOT=$(git rev-parse --show-toplevel)
 PLUTUS=$ROOT/plutus
 HS_TO_COQ=$ROOT/hs-to-coq
-OUTPUT=$ROOT/coq-output
+EDITS=$ROOT/edits
+PLUTUS_COQ=$ROOT/plutus-coq
 
+# GHC extensions to enable when translating to Coq.
 EXTENSIONS=(
   --ghc -XDeriveFoldable
   --ghc -XDeriveFunctor
@@ -28,6 +33,7 @@ EXTENSIONS=(
   --ghc -XMultiParamTypeClasses
 )
 
+# Directories to search for Haskell imports.
 IMPORTS=(
   --import-dir $PLUTUS/plutus-core/prelude
   --import-dir $PLUTUS/plutus-core/satint/src
@@ -95,19 +101,19 @@ MODULES=(
   $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/Common/ProtocolVersions.hs
   $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/Common/Versions.hs
   $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/Common.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Crypto.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Scripts.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Credential.hs
   $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Address.hs
   $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Bytes.hs
-  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Tx.hs
-  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Credential.hs
-  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Contexts.hs
-  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Crypto.hs
-  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/DCert.hs
-  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/EvaluationContext.hs
-  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Interval.hs
-  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/ParamName.hs
-  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Scripts.hs
-  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Time.hs
   $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Value.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Tx.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/DCert.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Interval.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Time.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/Contexts.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/EvaluationContext.hs
+  $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1/ParamName.hs
   $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V1.hs
   $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V2/Tx.hs
   $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V2/Contexts.hs
@@ -120,42 +126,40 @@ MODULES=(
   $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/V3.hs
 )
 
-[ -n "${1:-}" ] || rm -rf $OUTPUT
-mkdir -p $OUTPUT
+# Clean output dir first, for more reproducible results.
+[ -n "${1:-}" ] || rm -rf $PLUTUS_COQ
+mkdir -p $PLUTUS_COQ
 
-modcount=${#MODULES[@]}
+num_steps=$((${#MODULES[@]} + 1))
 i=0
 
+# Main loop, calls hs-to-coq on every module in $MODULES.
 for module in ${MODULES[@]}; do
   i=$((i+1))
 
   if [ -n "${1:-}" ] && [ "$1" -gt "$i" ]; then
     continue
   fi
-
-  echo "[$i / $modcount] Translating module $module..."
+  echo "[$i / $num_steps] Translating $module"
 
   stack exec --stack-yaml $HS_TO_COQ/stack.yaml hs-to-coq -- \
     --nonrecursive \
-    --ghc -v1 \
-    --ghc -fdefer-type-errors \
-    --ghc -fno-safe-haskell \
     ${EXTENSIONS[@]} \
-    -o $OUTPUT \
-    --preamble $ROOT/coq-edits/Preamble.v \
+    -o $PLUTUS_COQ \
+    --preamble $EDITS/Preamble.v \
     --edits $HS_TO_COQ/base/edits \
-    --edits $ROOT/coq-edits/edits \
+    --edits $EDITS/edits \
     --iface-dir $HS_TO_COQ/base \
-    --iface-dir $OUTPUT \
+    --iface-dir $PLUTUS_COQ \
     ${IMPORTS[@]} \
     $module
 done
 
-# Patch out infix declarations that Coq doesn't want to compile.
-echo "Patching Infix declarations..."
+# Patch out some infix declarations that specify incorrect precedence level.
+echo "[$num_steps / $num_steps] Patching Infix declarations."
 sed --in-place --regexp-extended 's/^(Infix \"[\&\|\<\>\+-\*/\].*) \(at.*\./\1./g' \
-  $OUTPUT/PlutusTx_Bool.v \
-  $OUTPUT/PlutusTx_Ord.v \
-  $OUTPUT/PlutusTx_List.v \
-  $OUTPUT/PlutusTx_Numeric.v \
-  $OUTPUT/PlutusTx_Lattice.v
+  $PLUTUS_COQ/PlutusTx_Bool.v \
+  $PLUTUS_COQ/PlutusTx_Ord.v \
+  $PLUTUS_COQ/PlutusTx_List.v \
+  $PLUTUS_COQ/PlutusTx_Numeric.v \
+  $PLUTUS_COQ/PlutusTx_Lattice.v
