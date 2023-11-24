@@ -34,5 +34,5 @@ executable math-bounty
     , bytestring
     , plutus-core
     , plutus-tx
-    -- , plutus-tx-plugin -- Only compiles with GHC >=9.2
+    , plutus-tx-plugin
     , plutus-ledger-api
