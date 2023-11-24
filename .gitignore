@@ -9,4 +9,3 @@ dist-newstyle/
 
 # hs-to-coq artifacts
 *.h2ci
-plutus-coq/

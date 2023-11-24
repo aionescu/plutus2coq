@@ -1,0 +1,5 @@
+# Tell GitHub's Linguist to ignore files in these directories when detecting repo language.
+# More info at https://github.com/github/linguist/blob/master/docs/overrides.md
+hs-to-coq/**  linguist-vendored
+plutus/**     linguist-vendored
+plutus-coq/** linguist-vendored
