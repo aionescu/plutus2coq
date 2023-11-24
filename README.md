@@ -2,14 +2,26 @@
 
 Translating the Plutus standard library to Coq
 
-## Installing prerequisites
+## Repository contents
+
+* [hs-to-coq](hs-to-coq) and [plutus](plutus): Git subtrees containing the source code of the 2 projects
+* [scripts](scripts): The main scripts used to translate to Coq and compile the generated code
+* [edits](edits): Coq preamble and edit files used by hs-to-coq while translating
+* [plutus-coq](plutus-coq): The generated PlutusTx Coq files
+* [examples/math-bounty](examples/math-bounty): An example smart contract written in Coq using the translated libraries, and extracted back to Haskell. More info can be found in the README inside its directory.
+
+## Re-generating the Coq files
+
+The generated Coq artifacts are included in the [plutus-coq](plutus-coq) directory, and the project can be used without re-generating them. If you still wish to re-generate them (e.g. with a newer Plutus version), the requirements and instructions are described below:
+
+### Required tools & libraries
 
 * libsodium & libblst
 * GHC 8.10.7
 * Stack 2.11.1
 * Coq 8.10.2 and packages coq-ssreflect 1.10.0, coq-itree 3.0.0
 
-### System Packages
+### System packages
 
 Plutus depends on the `libsodium` and `libblst` libraries.
 
@@ -77,19 +89,15 @@ Once done, change back to the repo's root directory:
 cd ..
 ```
 
-## Running the project
+## Generating the Coq files
 
-The translation process is split into three steps:
+To translate the Plutus libraries to Coq, simply run the [scripts/translate.sh](scripts/translate.sh) script.
+
+Afterwards, run the [scripts/compile.sh](scripts/compile.sh) script to compile the Coq files.
 
 ```bash
-./scripts/translate.sh # Translate the Plutus files to Coq using hs-to-coq
-./scripts/compile.sh   # Compile the generated Coq code
-./scripts/extract.sh   # Extract the generated Coq code to Haskell
+./scripts/translate.sh
+./scripts/compile.sh
 ```
 
-The final output is a Cabal project containing the extracted Haskell code, in the `coq-extracted` directory:
-
-```shell
-cd coq-extracted
-cabal build
-```
+The generated files are written to the [plutus-coq](plutus-coq) directory.
