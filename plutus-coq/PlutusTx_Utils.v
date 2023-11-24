@@ -18,20 +18,13 @@ Import GHC.Base.Notations.
 (* Converted imports: *)
 
 Require GHC.Base.
-Require GHC.Err.
-Import GHC.Base.Notations.
 
 (* No type declarations to convert. *)
 
 (* Converted value declarations: *)
 
-Definition mustBeReplaced {a : Type} : GHC.Base.String -> a :=
-  fun message =>
-    GHC.Err.error (GHC.Base.hs_string__
-                   "This must be replaced by the core-to-plc plugin during compilation: "
-                   GHC.Base.<<>>
-                   message).
+Axiom mustBeReplaced : forall {a : Type}, GHC.Base.String -> a.
 
 (* External variables:
-     Type GHC.Base.String GHC.Base.op_zlzlzgzg__ GHC.Err.error
+     Type GHC.Base.String
 *)

@@ -17,24 +17,19 @@ Import GHC.Base.Notations.
 
 (* Converted imports: *)
 
-Require Data.Set.Internal.
+Require GHC.Base.
 Require GHC.Enum.
 Require GHC.Num.
-Require HsToCoq.Err.
 Import GHC.Num.Notations.
 
 (* Converted type declarations: *)
 
 Inductive MajorProtocolVersion : Type :=
-  | MajorProtocolVersion (getMajorProtocolVersion : GHC.Num.Int)
+  | MkMajorProtocolVersion (getMajorProtocolVersion : GHC.Num.Int)
    : MajorProtocolVersion.
 
-Instance Default__MajorProtocolVersion
-   : HsToCoq.Err.Default MajorProtocolVersion :=
-  HsToCoq.Err.Build_Default _ (MajorProtocolVersion HsToCoq.Err.default).
-
 Definition getMajorProtocolVersion (arg_0__ : MajorProtocolVersion) :=
-  let 'MajorProtocolVersion getMajorProtocolVersion := arg_0__ in
+  let 'MkMajorProtocolVersion getMajorProtocolVersion := arg_0__ in
   getMajorProtocolVersion.
 
 (* Converted value declarations: *)
@@ -43,36 +38,33 @@ Definition getMajorProtocolVersion (arg_0__ : MajorProtocolVersion) :=
    `PlutusLedgerApi_Common_ProtocolVersions.Pretty__MajorProtocolVersion' *)
 
 Definition shelleyPV : MajorProtocolVersion :=
-  MajorProtocolVersion #2.
+  MkMajorProtocolVersion #2.
 
 Definition allegraPV : MajorProtocolVersion :=
-  MajorProtocolVersion #3.
+  MkMajorProtocolVersion #3.
 
 Definition maryPV : MajorProtocolVersion :=
-  MajorProtocolVersion #4.
+  MkMajorProtocolVersion #4.
 
 Definition alonzoPV : MajorProtocolVersion :=
-  MajorProtocolVersion #5.
+  MkMajorProtocolVersion #5.
 
 Definition vasilPV : MajorProtocolVersion :=
-  MajorProtocolVersion #7.
+  MkMajorProtocolVersion #7.
 
 Definition valentinePV : MajorProtocolVersion :=
-  MajorProtocolVersion #8.
+  MkMajorProtocolVersion #8.
 
 Definition conwayPV : MajorProtocolVersion :=
-  MajorProtocolVersion #9.
+  MkMajorProtocolVersion #9.
 
-Definition knownPVs : Data.Set.Internal.Set_ MajorProtocolVersion :=
-  Data.Set.Internal.fromList (cons shelleyPV (cons allegraPV (cons maryPV (cons
-                                                                    alonzoPV (cons vasilPV (cons valentinePV (cons
-                                                                                                  conwayPV nil))))))).
+Definition knownPVs : list MajorProtocolVersion :=
+  GHC.Base.id (cons shelleyPV (cons allegraPV (cons maryPV (cons alonzoPV (cons
+                                                                  vasilPV (cons valentinePV (cons conwayPV nil))))))).
 
 Definition futurePV : MajorProtocolVersion :=
-  MajorProtocolVersion GHC.Enum.maxBound.
+  MkMajorProtocolVersion GHC.Enum.maxBound.
 
 (* External variables:
-     cons nil Data.Set.Internal.Set_ Data.Set.Internal.fromList GHC.Enum.maxBound
-     GHC.Num.Int GHC.Num.fromInteger HsToCoq.Err.Build_Default HsToCoq.Err.Default
-     HsToCoq.Err.default
+     cons list nil GHC.Base.id GHC.Enum.maxBound GHC.Num.Int GHC.Num.fromInteger
 *)

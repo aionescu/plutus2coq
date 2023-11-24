@@ -9,13 +9,13 @@ HS_TO_COQ=$ROOT/hs-to-coq
 PLUTUS_COQ=$ROOT/plutus-coq
 
 # The Coq modules to compile.
-# Note: The commented modules don't currently compile, due to missing third-party dependencies or other issues.
+# Note: The commented modules don't currently compile (but are also unneeded in Coq
+# due to heavy reliance on TH, or because they handle PLC compilation.
 MODULES=(
   $PLUTUS_COQ/PlutusCore_Data.v
   $PLUTUS_COQ/PlutusCore_Evaluation_Result.v
   $PLUTUS_COQ/PlutusCore_Builtin_Emitter.v
-  # $PLUTUS_COQ/PlutusTx_Coverage.v
-  # $PLUTUS_COQ/PlutusTx_Utils.v
+  $PLUTUS_COQ/PlutusTx_Utils.v
   $PLUTUS_COQ/PlutusTx_These.v
   $PLUTUS_COQ/PlutusTx_Bool.v
   $PLUTUS_COQ/PlutusTx_Integer.v
@@ -39,30 +39,31 @@ MODULES=(
   $PLUTUS_COQ/PlutusTx_Traversable.v
   $PLUTUS_COQ/PlutusTx_Enum.v
   $PLUTUS_COQ/PlutusTx_Lattice.v
+  # $PLUTUS_COQ/PlutusTx_Code.v
+  # $PLUTUS_COQ/PlutusTx_Plugin_Utils.v
   # $PLUTUS_COQ/PlutusTx_Lift_Class.v
   # $PLUTUS_COQ/PlutusTx_Lift_THUtils.v
   # $PLUTUS_COQ/PlutusTx_Lift_TH.v
   # $PLUTUS_COQ/PlutusTx_Lift_Instances.v
   # $PLUTUS_COQ/PlutusTx_Lift.v
-  # $PLUTUS_COQ/PlutusTx_Code.v
-  # $PLUTUS_COQ/PlutusTx_IsData_Class.v
+  $PLUTUS_COQ/PlutusTx_IsData_Class.v
   # $PLUTUS_COQ/PlutusTx_IsData_TH.v
-  # $PLUTUS_COQ/PlutusTx_IsData_Instances.v
-  # $PLUTUS_COQ/PlutusTx_IsData.v
-  # $PLUTUS_COQ/PlutusTx_AsData.v
+  $PLUTUS_COQ/PlutusTx_IsData_Instances.v
+  $PLUTUS_COQ/PlutusTx_IsData.v
+  $PLUTUS_COQ/PlutusTx_AsData.v
   $PLUTUS_COQ/PlutusTx_Ratio.v
   $PLUTUS_COQ/PlutusTx_Prelude.v
   $PLUTUS_COQ/PlutusTx_Sqrt.v
   $PLUTUS_COQ/PlutusTx_AssocMap.v
-  # $PLUTUS_COQ/PlutusTx_Show_TH.v
-  # $PLUTUS_COQ/PlutusTx_Show.v
-  # $PLUTUS_COQ/PlutusTx_Plugin_Utils.v
-  # $PLUTUS_COQ/PlutusTx_TH.v
+  $PLUTUS_COQ/PlutusTx_Coverage.v
+  $PLUTUS_COQ/PlutusTx_Show_TH.v
+  $PLUTUS_COQ/PlutusTx_Show.v
+  $PLUTUS_COQ/PlutusTx_TH.v
   $PLUTUS_COQ/PlutusTx.v
-  # $PLUTUS_COQ/PlutusLedgerApi_Common_ParamName.v
-  # $PLUTUS_COQ/PlutusLedgerApi_Common_ProtocolVersions.v
-  # $PLUTUS_COQ/PlutusLedgerApi_Common_Versions.v
-  # $PLUTUS_COQ/PlutusLedgerApi_Common.v
+  $PLUTUS_COQ/PlutusLedgerApi_Common_ParamName.v
+  $PLUTUS_COQ/PlutusLedgerApi_Common_ProtocolVersions.v
+  $PLUTUS_COQ/PlutusLedgerApi_Common_Versions.v
+  $PLUTUS_COQ/PlutusLedgerApi_Common.v
   $PLUTUS_COQ/PlutusLedgerApi_V1_Crypto.v
   $PLUTUS_COQ/PlutusLedgerApi_V1_Scripts.v
   $PLUTUS_COQ/PlutusLedgerApi_V1_Credential.v
@@ -74,31 +75,26 @@ MODULES=(
   $PLUTUS_COQ/PlutusLedgerApi_V1_Interval.v
   $PLUTUS_COQ/PlutusLedgerApi_V1_Time.v
   $PLUTUS_COQ/PlutusLedgerApi_V1_Contexts.v
-  # $PLUTUS_COQ/PlutusLedgerApi_V1_EvaluationContext.v
+  $PLUTUS_COQ/PlutusLedgerApi_V1_EvaluationContext.v
   $PLUTUS_COQ/PlutusLedgerApi_V1_ParamName.v
-  # $PLUTUS_COQ/PlutusLedgerApi_V1.v
+  $PLUTUS_COQ/PlutusLedgerApi_V1.v
   $PLUTUS_COQ/PlutusLedgerApi_V2_Tx.v
   $PLUTUS_COQ/PlutusLedgerApi_V2_Contexts.v
-  # $PLUTUS_COQ/PlutusLedgerApi_V2_EvaluationContext.v
+  $PLUTUS_COQ/PlutusLedgerApi_V2_EvaluationContext.v
   $PLUTUS_COQ/PlutusLedgerApi_V2_ParamName.v
-  # $PLUTUS_COQ/PlutusLedgerApi_V2.v
+  $PLUTUS_COQ/PlutusLedgerApi_V2.v
   $PLUTUS_COQ/PlutusLedgerApi_V3_Contexts.v
-  # $PLUTUS_COQ/PlutusLedgerApi_V3_EvaluationContext.v
+  $PLUTUS_COQ/PlutusLedgerApi_V3_EvaluationContext.v
   $PLUTUS_COQ/PlutusLedgerApi_V3_ParamName.v
-  # $PLUTUS_COQ/PlutusLedgerApi_V3.v
+  $PLUTUS_COQ/PlutusLedgerApi_V3.v
 )
 
-num_steps=${#MODULES[@]}
+num_modules=${#MODULES[@]}
 i=0
 
 for module in ${MODULES[@]}; do
   i=$((i+1))
-
-  if [ -n "${1:-}" ] && [ "$1" -gt "$i" ]; then
-    continue
-  fi
-
-  echo "[$i / $num_steps] Compiling $module"
+  echo "[$i / $num_modules] Compiling $module"
 
   coqc \
     -Q $HS_TO_COQ/base "" \

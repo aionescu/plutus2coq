@@ -104,12 +104,11 @@ Require PlutusCore_Data.
 (* Skipping all instances of class `PlutusTx_IsData_Class.UnsafeFromData',
    including `PlutusTx_IsData_Class.UnsafeFromData__BuiltinBLS12_381_MlResult' *)
 
-Axiom toData : forall {a : GHC.Types.Type_},
-               forall `{ToData a}, a -> PlutusCore_Data.Data.
+Axiom toData : forall {a}, forall `{ToData a}, a -> PlutusCore_Data.Data.
 
-Axiom fromData : forall {a : GHC.Types.Type_},
+Axiom fromData : forall {a},
                  forall `{FromData a}, PlutusCore_Data.Data -> option a.
 
 (* External variables:
-     FromData ToData option GHC.Types.Type_ PlutusCore_Data.Data
+     FromData ToData option PlutusCore_Data.Data
 *)

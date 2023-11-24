@@ -52,7 +52,6 @@ MODULES=(
   $PLUTUS/plutus-core/plutus-core/src/PlutusCore/Data.hs
   $PLUTUS/plutus-core/plutus-core/src/PlutusCore/Evaluation/Result.hs
   $PLUTUS/plutus-core/plutus-core/src/PlutusCore/Builtin/Emitter.hs
-  $PLUTUS/plutus-tx/src/PlutusTx/Coverage.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Utils.hs
   $PLUTUS/plutus-tx/src/PlutusTx/These.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Bool.hs
@@ -77,12 +76,13 @@ MODULES=(
   $PLUTUS/plutus-tx/src/PlutusTx/Traversable.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Enum.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Lattice.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Code.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Plugin/Utils.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Lift/Class.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Lift/THUtils.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Lift/TH.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Lift/Instances.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Lift.hs
-  $PLUTUS/plutus-tx/src/PlutusTx/Code.hs
   $PLUTUS/plutus-tx/src/PlutusTx/IsData/Class.hs
   $PLUTUS/plutus-tx/src/PlutusTx/IsData/TH.hs
   $PLUTUS/plutus-tx/src/PlutusTx/IsData/Instances.hs
@@ -92,9 +92,9 @@ MODULES=(
   $PLUTUS/plutus-tx/src/PlutusTx/Prelude.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Sqrt.hs
   $PLUTUS/plutus-tx/src/PlutusTx/AssocMap.hs
+  $PLUTUS/plutus-tx/src/PlutusTx/Coverage.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Show/TH.hs
   $PLUTUS/plutus-tx/src/PlutusTx/Show.hs
-  $PLUTUS/plutus-tx/src/PlutusTx/Plugin/Utils.hs
   $PLUTUS/plutus-tx/src/PlutusTx/TH.hs
   $PLUTUS/plutus-tx/src/PlutusTx.hs
   $PLUTUS/plutus-ledger-api/src/PlutusLedgerApi/Common/ParamName.hs
@@ -127,7 +127,7 @@ MODULES=(
 )
 
 # Clean output dir first, for more reproducible results.
-[ -n "${1:-}" ] || rm -rf $PLUTUS_COQ
+rm -rf $PLUTUS_COQ
 mkdir -p $PLUTUS_COQ
 
 num_steps=$((${#MODULES[@]} + 1))
@@ -136,10 +136,6 @@ i=0
 # Main loop, calls hs-to-coq on every module in $MODULES.
 for module in ${MODULES[@]}; do
   i=$((i+1))
-
-  if [ -n "${1:-}" ] && [ "$1" -gt "$i" ]; then
-    continue
-  fi
   echo "[$i / $num_steps] Translating $module"
 
   stack exec --stack-yaml $HS_TO_COQ/stack.yaml hs-to-coq -- \

@@ -15,30 +15,14 @@ Require Coq.Program.Wf.
 Require GHC.Base.
 Import GHC.Base.Notations.
 
-(* Converted imports: *)
-
-Require GHC.Base.
-Require Language.Haskell.TH.Syntax.
-Require Language.Haskell.TH.Syntax.Compat.
-Require PlutusTx_Code.
+(* No imports to convert. *)
 
 (* No type declarations to convert. *)
 
-(* Converted value declarations: *)
+(* No value declarations to convert. *)
 
-Axiom compile : forall {a : Type},
-                Language.Haskell.TH.Syntax.Compat.SpliceQ a ->
-                Language.Haskell.TH.Syntax.Compat.SpliceQ (PlutusTx_Code.CompiledCode a).
+(* Skipping definition `PlutusTx_TH.compile' *)
 
-Axiom loadFromFile : forall {a : Type},
-                     GHC.Base.String ->
-                     Language.Haskell.TH.Syntax.Compat.SpliceQ (PlutusTx_Code.CompiledCode a).
+(* Skipping definition `PlutusTx_TH.loadFromFile' *)
 
-Axiom compileUntyped : Language.Haskell.TH.Syntax.Q
-                       Language.Haskell.TH.Syntax.Exp ->
-                       Language.Haskell.TH.Syntax.Q Language.Haskell.TH.Syntax.Exp.
-
-(* External variables:
-     Type GHC.Base.String Language.Haskell.TH.Syntax.Exp Language.Haskell.TH.Syntax.Q
-     Language.Haskell.TH.Syntax.Compat.SpliceQ PlutusTx_Code.CompiledCode
-*)
+(* Skipping definition `PlutusTx_TH.compileUntyped' *)

@@ -15,21 +15,12 @@ Require Coq.Program.Wf.
 Require GHC.Base.
 Import GHC.Base.Notations.
 
-(* Converted imports: *)
-
-Require Language.Haskell.TH.Syntax.
+(* No imports to convert. *)
 
 (* No type declarations to convert. *)
 
-(* Converted value declarations: *)
+(* No value declarations to convert. *)
 
-Axiom asData : Language.Haskell.TH.Syntax.Q (list
-                                             Language.Haskell.TH.Syntax.Dec) ->
-               Language.Haskell.TH.Syntax.Q (list Language.Haskell.TH.Syntax.Dec).
+(* Skipping definition `PlutusTx_AsData.asData' *)
 
-Axiom asDataFor : Language.Haskell.TH.Syntax.Dec ->
-                  Language.Haskell.TH.Syntax.Q (list Language.Haskell.TH.Syntax.Dec).
-
-(* External variables:
-     list Language.Haskell.TH.Syntax.Dec Language.Haskell.TH.Syntax.Q
-*)
+(* Skipping definition `PlutusTx_AsData.asDataFor' *)

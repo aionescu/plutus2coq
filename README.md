@@ -6,7 +6,7 @@ This project aims to enable Plutus smart contract development in Coq, by providi
 
 * [hs-to-coq](hs-to-coq) and [plutus](plutus): Git subtrees containing the source code of the 2 projects
 * [scripts](scripts): The main scripts used to translate to Coq and compile the generated code
-* [edits](edits): Coq preamble and edit files used by hs-to-coq while translating
+* [edits](edits): Coq edits and preamble files used by hs-to-coq while translating
 * [plutus-coq](plutus-coq): The generated PlutusTx Coq files
 * [examples/math-bounty](examples/math-bounty): An example smart contract written in Coq using the translated libraries, and extracted back to Haskell. More info can be found in the README inside its directory.
 

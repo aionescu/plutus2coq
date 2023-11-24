@@ -18,9 +18,6 @@ Import GHC.Base.Notations.
 (* Converted imports: *)
 
 Require BinNums.
-Require GHC.Base.
-Require Language.Haskell.TH.Datatype.
-Require Language.Haskell.TH.Syntax.
 Require PlutusTx_Builtins_Internal.
 
 (* Converted type declarations: *)
@@ -46,28 +43,18 @@ Axiom appPrec1 : BinNums.Z.
 Axiom concatBuiltinStrings : list PlutusTx_Builtins_Internal.BuiltinString ->
                              PlutusTx_Builtins_Internal.BuiltinString.
 
-Axiom deriveShow : Language.Haskell.TH.Syntax.Name ->
-                   Language.Haskell.TH.Syntax.Q (list Language.Haskell.TH.Syntax.Dec).
+(* Skipping definition `PlutusTx_Show_TH.deriveShow' *)
 
-Axiom deriveShowsPrec : list Language.Haskell.TH.Datatype.ConstructorInfo ->
-                        list (Language.Haskell.TH.Syntax.Q Language.Haskell.TH.Syntax.Dec).
+(* Skipping definition `PlutusTx_Show_TH.deriveShowsPrec' *)
 
-Axiom deriveShowsPrecBody : list Language.Haskell.TH.Datatype.ConstructorInfo ->
-                            Language.Haskell.TH.Syntax.Q Language.Haskell.TH.Syntax.Exp.
+(* Skipping definition `PlutusTx_Show_TH.deriveShowsPrecBody' *)
 
-Axiom deriveMatchForCon : Language.Haskell.TH.Syntax.Name ->
-                          Language.Haskell.TH.Datatype.ConstructorInfo ->
-                          Language.Haskell.TH.Syntax.Q Language.Haskell.TH.Syntax.Match.
+(* Skipping definition `PlutusTx_Show_TH.deriveMatchForCon' *)
 
-Axiom deriveShowExpForArg : BinNums.Z ->
-                            Language.Haskell.TH.Syntax.Name ->
-                            Language.Haskell.TH.Syntax.Q Language.Haskell.TH.Syntax.Exp.
+(* Skipping definition `PlutusTx_Show_TH.deriveShowExpForArg' *)
 
-Axiom parenInfixConName : Language.Haskell.TH.Syntax.Name -> GHC.Base.String.
+(* Skipping definition `PlutusTx_Show_TH.parenInfixConName' *)
 
 (* External variables:
-     bool list BinNums.Z GHC.Base.String Language.Haskell.TH.Datatype.ConstructorInfo
-     Language.Haskell.TH.Syntax.Dec Language.Haskell.TH.Syntax.Exp
-     Language.Haskell.TH.Syntax.Match Language.Haskell.TH.Syntax.Name
-     Language.Haskell.TH.Syntax.Q PlutusTx_Builtins_Internal.BuiltinString
+     bool list BinNums.Z PlutusTx_Builtins_Internal.BuiltinString
 *)

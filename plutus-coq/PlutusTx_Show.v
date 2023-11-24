@@ -18,15 +18,7 @@ Import GHC.Base.Notations.
 (* Converted imports: *)
 
 Require BinNums.
-Require GHC.Num.
-Require PlutusTx_Base.
-Require PlutusTx_Eq.
-Require PlutusTx_List.
-Require PlutusTx_Numeric.
 Require PlutusTx_Show_TH.
-Import GHC.Num.Notations.
-Import PlutusTx_Base.Notations.
-Import PlutusTx_Eq.Notations.
 
 (* No type declarations to convert. *)
 
@@ -137,33 +129,11 @@ Import PlutusTx_Eq.Notations.
 (* Skipping all instances of class `PlutusTx_Show_TH.Show', including
    `PlutusTx_Show.Show__Either' *)
 
-Definition toDigits : BinNums.Z -> list BinNums.Z :=
-  let fix go acc n
-    := let 'pair q r := PlutusTx_Numeric.quotRem n #10 in
-       if q PlutusTx_Eq.== #0 : bool
-       then cons r acc
-       else go (cons r acc) q in
-  go nil.
+Axiom toDigits : BinNums.Z -> list BinNums.Z.
 
-Definition showList {a}
-   : (a -> PlutusTx_Show_TH.ShowS) -> list a -> PlutusTx_Show_TH.ShowS :=
-  fun showElem =>
-    fun arg_0__ =>
-      match arg_0__ with
-      | nil => PlutusTx_Show_TH.showString (GHC.Base.hs_string__ "[]")
-      | cons x xs =>
-          let alg : a -> PlutusTx_Show_TH.ShowS -> PlutusTx_Show_TH.ShowS :=
-            fun a acc =>
-              PlutusTx_Show_TH.showString (GHC.Base.hs_string__ ",") PlutusTx_Base.∘
-              (showElem a PlutusTx_Base.∘ acc) in
-          PlutusTx_Show_TH.showString (GHC.Base.hs_string__ "[") PlutusTx_Base.∘
-          (showElem x PlutusTx_Base.∘
-           (PlutusTx_List.foldr alg PlutusTx_Base.id xs PlutusTx_Base.∘
-            PlutusTx_Show_TH.showString (GHC.Base.hs_string__ "]")))
-      end.
+Axiom showList : forall {a},
+                 (a -> PlutusTx_Show_TH.ShowS) -> list a -> PlutusTx_Show_TH.ShowS.
 
 (* External variables:
-     bool cons list nil pair BinNums.Z GHC.Num.fromInteger PlutusTx_Base.id
-     PlutusTx_Base.op_z2218U__ PlutusTx_Eq.op_zeze__ PlutusTx_List.foldr
-     PlutusTx_Numeric.quotRem PlutusTx_Show_TH.ShowS PlutusTx_Show_TH.showString
+     list BinNums.Z PlutusTx_Show_TH.ShowS
 *)

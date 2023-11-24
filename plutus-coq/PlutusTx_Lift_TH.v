@@ -21,8 +21,6 @@ Require Control.Monad.Reader.Class.
 Require Control.Monad.Trans.Except.
 Require Control.Monad.Trans.Reader.
 Require Control.Monad.Trans.State.Lazy.
-Require Data.Map.Internal.
-Require Data.Set.Internal.
 Require GHC.Num.
 Require HsToCoq.Err.
 Require Language.Haskell.TH.Datatype.
@@ -33,16 +31,17 @@ Require PlutusCore.Default.Universe.
 Require PlutusCore.Name.
 Require PlutusIR.Core.Type.
 Require PlutusIR.MkPir.
+Require PlutusTx_AssocMap.
 Require PlutusTx_Lift_Class.
 Require String.
 
 (* Converted type declarations: *)
 
 Definition THLocalVars :=
-  (Data.Set.Internal.Set_ Language.Haskell.TH.Syntax.Name)%type.
+  (list Language.Haskell.TH.Syntax.Name)%type.
 
 Definition LocalVars uni :=
-  (Data.Map.Internal.Map Language.Haskell.TH.Syntax.Name
+  (PlutusTx_AssocMap.Map Language.Haskell.TH.Syntax.Name
    (PlutusCore.Core.Type.Type_ PlutusCore.Name.TyName uni unit))%type.
 
 Definition RTCompileScope uni fun_ :=
@@ -61,7 +60,7 @@ Inductive Dep : Type :=
   | LiftDep : Language.Haskell.TH.Syntax.Type_ -> Dep.
 
 Definition Deps :=
-  (Data.Set.Internal.Set_ Dep)%type.
+  (list Dep)%type.
 
 Definition THCompile :=
   (Control.Monad.Trans.State.Lazy.StateT Deps (Control.Monad.Trans.Reader.ReaderT
@@ -148,8 +147,7 @@ Axiom thWithTyVars : forall {m} {a},
                      forall `{(Control.Monad.Reader.Class.MonadReader THLocalVars m)},
                      list Language.Haskell.TH.Syntax.Name -> m a -> m a.
 
-Axiom getTyConDeps : Deps ->
-                     Data.Set.Internal.Set_ Language.Haskell.TH.Syntax.Name.
+Axiom getTyConDeps : Deps -> list Language.Haskell.TH.Syntax.Name.
 
 Axiom addTypeableDep : Language.Haskell.TH.Syntax.Type_ -> THCompile unit.
 
@@ -194,7 +192,7 @@ Axiom defineDatatype' : forall {fun_},
                         Language.Haskell.TH.Syntax.Name ->
                         PlutusIR.MkPir.DatatypeDef PlutusCore.Name.TyName PlutusCore.Name.Name
                         PlutusCore.Default.Universe.DefaultUni unit ->
-                        Data.Set.Internal.Set_ Language.Haskell.TH.Syntax.Name ->
+                        list Language.Haskell.TH.Syntax.Name ->
                         RTCompileScope PlutusCore.Default.Universe.DefaultUni fun_ unit.
 
 Axiom compileTypeRep : Language.Haskell.TH.Datatype.DatatypeInfo ->
@@ -225,9 +223,9 @@ Axiom runTHCompile : forall {a},
 (* External variables:
      bool list op_zt__ unit Control.Monad.Reader.Class.MonadReader
      Control.Monad.Trans.Except.ExceptT Control.Monad.Trans.Reader.ReaderT
-     Control.Monad.Trans.State.Lazy.StateT Data.Map.Internal.Map
-     Data.Set.Internal.Set_ GHC.Num.Int HsToCoq.Err.Build_Default HsToCoq.Err.Default
-     HsToCoq.Err.default Language.Haskell.TH.Datatype.ConstructorInfo
+     Control.Monad.Trans.State.Lazy.StateT GHC.Num.Int HsToCoq.Err.Build_Default
+     HsToCoq.Err.Default HsToCoq.Err.default
+     Language.Haskell.TH.Datatype.ConstructorInfo
      Language.Haskell.TH.Datatype.DatatypeInfo Language.Haskell.TH.Lib.Internal.TExpQ
      Language.Haskell.TH.Syntax.Clause Language.Haskell.TH.Syntax.Dec
      Language.Haskell.TH.Syntax.Kind Language.Haskell.TH.Syntax.Name
@@ -237,5 +235,5 @@ Axiom runTHCompile : forall {a},
      PlutusCore.Core.Type.Type_ PlutusCore.Core.Type.VarDecl
      PlutusCore.Default.Universe.DefaultUni PlutusCore.Name.Name
      PlutusCore.Name.TyName PlutusIR.Core.Type.Term PlutusIR.MkPir.DatatypeDef
-     PlutusTx_Lift_Class.RTCompile String.string
+     PlutusTx_AssocMap.Map PlutusTx_Lift_Class.RTCompile String.string
 *)
