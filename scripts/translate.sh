@@ -31,6 +31,7 @@ EXTENSIONS=(
   --ghc -XTypeFamilies
   --ghc -XLambdaCase
   --ghc -XMultiParamTypeClasses
+  --ghc -XAllowAmbiguousTypes
 )
 
 # Directories to search for Haskell imports.
@@ -127,7 +128,7 @@ MODULES=(
 )
 
 # Clean output dir first, for more reproducible results.
-rm -rf $PLUTUS_COQ
+rm -rf $PLUTUS_COQ .ghc-tmp
 mkdir -p $PLUTUS_COQ
 
 num_steps=$((${#MODULES[@]} + 1))
@@ -141,6 +142,8 @@ for module in ${MODULES[@]}; do
   stack exec --stack-yaml $HS_TO_COQ/stack.yaml hs-to-coq -- \
     --nonrecursive \
     ${EXTENSIONS[@]} \
+    --ghc -fdefer-type-errors \
+    --ghc -Wno-deferred-type-errors \
     -o $PLUTUS_COQ \
     --preamble $EDITS/Preamble.v \
     --edits $HS_TO_COQ/base/edits \
